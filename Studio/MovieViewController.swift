@@ -10,15 +10,17 @@ import UIKit
 import AVFoundation
 import AVKit
 
-class VideoViewController: AVPlayerViewController {
+class MovieViewController: UIViewController {
+
+    var player: AVPlayer!
+    var controller = AVPlayerViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        guard let url: URL = URL(string: "http://devstreaming.apple.com/videos/wwdc/2016/102w0bsn0ge83qfv7za/102/hls_vod_mvp.m3u8") else { print("video URL error"); return }
-        let player = AVPlayer(url: url)
-        let controller=AVPlayerViewController()
-        controller.player=player
+        guard let url: URL = URL(string: "https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4") else { print("video URL error"); return }
+        player = AVPlayer(url: url)
+        controller.player = player
         controller.view.frame = self.view.frame
         self.view.addSubview(controller.view)
         self.addChildViewController(controller)

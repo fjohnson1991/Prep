@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		63AE9C8B5F8AD43EB9A19AF9 /* Pods_Studio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01BED6A852FAF9A61220699E /* Pods_Studio.framework */; };
-		B55AA8B81E1C3BCB0036BE7B /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55AA8B71E1C3BCB0036BE7B /* VideoViewController.swift */; };
+		B55AA8BA1E1C4B190036BE7B /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55AA8B91E1C4B190036BE7B /* VideoViewController.swift */; };
+		B55AA8BC1E1C4FAF0036BE7B /* MovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55AA8BB1E1C4FAF0036BE7B /* MovieViewController.swift */; };
 		B5F56BC41E1B09A000BBA975 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F56BC31E1B09A000BBA975 /* AppDelegate.swift */; };
 		B5F56BC61E1B09A000BBA975 /* InviteFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F56BC51E1B09A000BBA975 /* InviteFriendViewController.swift */; };
 		B5F56BC91E1B09A000BBA975 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5F56BC71E1B09A000BBA975 /* Main.storyboard */; };
@@ -21,7 +22,8 @@
 		01BED6A852FAF9A61220699E /* Pods_Studio.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Studio.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C5496F5C71C701CB921559A /* Pods-Studio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studio.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Studio/Pods-Studio.debug.xcconfig"; sourceTree = "<group>"; };
 		9C0EB65CA1F0AA5AED6B2228 /* Pods-Studio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studio.release.xcconfig"; path = "Pods/Target Support Files/Pods-Studio/Pods-Studio.release.xcconfig"; sourceTree = "<group>"; };
-		B55AA8B71E1C3BCB0036BE7B /* VideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
+		B55AA8B91E1C4B190036BE7B /* VideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
+		B55AA8BB1E1C4FAF0036BE7B /* MovieViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieViewController.swift; sourceTree = "<group>"; };
 		B5F56BC01E1B09A000BBA975 /* Studio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Studio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5F56BC31E1B09A000BBA975 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B5F56BC51E1B09A000BBA975 /* InviteFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteFriendViewController.swift; sourceTree = "<group>"; };
@@ -79,8 +81,9 @@
 				B5F56BD51E1BD73200BBA975 /* Constants.swift */,
 				B5F56BC31E1B09A000BBA975 /* AppDelegate.swift */,
 				B5F56BC51E1B09A000BBA975 /* InviteFriendViewController.swift */,
-				B55AA8B71E1C3BCB0036BE7B /* VideoViewController.swift */,
+				B55AA8BB1E1C4FAF0036BE7B /* MovieViewController.swift */,
 				B5F56BC71E1B09A000BBA975 /* Main.storyboard */,
+				B55AA8B91E1C4B190036BE7B /* VideoViewController.swift */,
 				B5F56BCA1E1B09A000BBA975 /* Assets.xcassets */,
 				B5F56BCC1E1B09A000BBA975 /* LaunchScreen.storyboard */,
 				B5F56BCF1E1B09A000BBA975 /* Info.plist */,
@@ -226,8 +229,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5F56BC61E1B09A000BBA975 /* InviteFriendViewController.swift in Sources */,
+				B55AA8BC1E1C4FAF0036BE7B /* MovieViewController.swift in Sources */,
+				B55AA8BA1E1C4B190036BE7B /* VideoViewController.swift in Sources */,
 				B5F56BC41E1B09A000BBA975 /* AppDelegate.swift in Sources */,
-				B55AA8B81E1C3BCB0036BE7B /* VideoViewController.swift in Sources */,
 				B5F56BD61E1BD73200BBA975 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
