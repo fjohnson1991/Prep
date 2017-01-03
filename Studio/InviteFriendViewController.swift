@@ -9,7 +9,7 @@
 import UIKit
 import Branch
 
-class ViewController: UIViewController {
+class InviteFriendViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +28,7 @@ class ViewController: UIViewController {
         let branchUniversalObject: BranchUniversalObject = BranchUniversalObject(canonicalIdentifier: "item/12345")
         branchUniversalObject.title = "Studio"
         branchUniversalObject.contentDescription = "Join an exercise class"
-        branchUniversalObject.imageUrl = "file:///Users/felicityjohnson/Development%20Projects/Studio/Studio/Assets.xcassets/StudioIcon.imageset/image00-1.png"
+        branchUniversalObject.imageUrl = "https://drive.google.com/uc?id=0B4g_ZeUOQsvxU3JZcTQxVHJDa3M"
         
         let linkProperties: BranchLinkProperties = BranchLinkProperties()
         linkProperties.feature = "sharing"

@@ -8,8 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		63AE9C8B5F8AD43EB9A19AF9 /* Pods_Studio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01BED6A852FAF9A61220699E /* Pods_Studio.framework */; };
+		B55AA8B81E1C3BCB0036BE7B /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55AA8B71E1C3BCB0036BE7B /* VideoViewController.swift */; };
 		B5F56BC41E1B09A000BBA975 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F56BC31E1B09A000BBA975 /* AppDelegate.swift */; };
-		B5F56BC61E1B09A000BBA975 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F56BC51E1B09A000BBA975 /* ViewController.swift */; };
+		B5F56BC61E1B09A000BBA975 /* InviteFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F56BC51E1B09A000BBA975 /* InviteFriendViewController.swift */; };
 		B5F56BC91E1B09A000BBA975 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5F56BC71E1B09A000BBA975 /* Main.storyboard */; };
 		B5F56BCB1E1B09A000BBA975 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5F56BCA1E1B09A000BBA975 /* Assets.xcassets */; };
 		B5F56BCE1E1B09A000BBA975 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5F56BCC1E1B09A000BBA975 /* LaunchScreen.storyboard */; };
@@ -20,9 +21,10 @@
 		01BED6A852FAF9A61220699E /* Pods_Studio.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Studio.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C5496F5C71C701CB921559A /* Pods-Studio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studio.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Studio/Pods-Studio.debug.xcconfig"; sourceTree = "<group>"; };
 		9C0EB65CA1F0AA5AED6B2228 /* Pods-Studio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studio.release.xcconfig"; path = "Pods/Target Support Files/Pods-Studio/Pods-Studio.release.xcconfig"; sourceTree = "<group>"; };
+		B55AA8B71E1C3BCB0036BE7B /* VideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		B5F56BC01E1B09A000BBA975 /* Studio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Studio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5F56BC31E1B09A000BBA975 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B5F56BC51E1B09A000BBA975 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B5F56BC51E1B09A000BBA975 /* InviteFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteFriendViewController.swift; sourceTree = "<group>"; };
 		B5F56BC81E1B09A000BBA975 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B5F56BCA1E1B09A000BBA975 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B5F56BCD1E1B09A000BBA975 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -76,7 +78,8 @@
 				B5F56BD71E1BD8F200BBA975 /* Studio.entitlements */,
 				B5F56BD51E1BD73200BBA975 /* Constants.swift */,
 				B5F56BC31E1B09A000BBA975 /* AppDelegate.swift */,
-				B5F56BC51E1B09A000BBA975 /* ViewController.swift */,
+				B5F56BC51E1B09A000BBA975 /* InviteFriendViewController.swift */,
+				B55AA8B71E1C3BCB0036BE7B /* VideoViewController.swift */,
 				B5F56BC71E1B09A000BBA975 /* Main.storyboard */,
 				B5F56BCA1E1B09A000BBA975 /* Assets.xcassets */,
 				B5F56BCC1E1B09A000BBA975 /* LaunchScreen.storyboard */,
@@ -222,8 +225,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5F56BC61E1B09A000BBA975 /* ViewController.swift in Sources */,
+				B5F56BC61E1B09A000BBA975 /* InviteFriendViewController.swift in Sources */,
 				B5F56BC41E1B09A000BBA975 /* AppDelegate.swift in Sources */,
+				B55AA8B81E1C3BCB0036BE7B /* VideoViewController.swift in Sources */,
 				B5F56BD61E1BD73200BBA975 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
