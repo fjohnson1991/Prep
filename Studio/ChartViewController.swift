@@ -70,7 +70,7 @@ class ChartViewController: UIViewController {
         let chartData = BarChartData()
         chartData.addDataSet(chartDataSet)
         chartData.setDrawValues(false) // true if want values above bar
-        chartDataSet.colors = [UIColor(red: 255/255, green: 0/255, blue: 102/255, alpha: 1)]
+        chartDataSet.colors = [UIColor.themePink]
 
         // Axes setup
         let formatter: ChartFormatter = ChartFormatter()
@@ -123,10 +123,17 @@ class ChartViewController: UIViewController {
         let chartData = LineChartData()
         chartData.addDataSet(chartDataSet)
         chartData.setDrawValues(true) // false if don't want values above bar
-        chartDataSet.colors = [UIColor(red: 255/255, green: 0/255, blue: 102/255, alpha: 1)]
-        chartDataSet.setCircleColor(UIColor(red: 255/255, green: 0/255, blue: 102/255, alpha: 1))
-        chartDataSet.circleHoleColor = UIColor(red: 255/255, green: 0/255, blue: 102/255, alpha: 1)
+        chartDataSet.colors = [UIColor.themePink]
+        chartDataSet.setCircleColor(UIColor.themePink)
+        chartDataSet.circleHoleColor = UIColor.themePink
         chartDataSet.circleRadius = 4.0
+        
+        // Gradient fill
+        let gradientColors = [UIColor.themePink.cgColor, UIColor.clear.cgColor] as CFArray
+        let colorLocations: [CGFloat] = [1.0, 0.0] // positioning of gradient
+        guard let gradient = CGGradient.init(colorsSpace: CGColorSpaceCreateDeviceRGB(), colors: gradientColors, locations: colorLocations) else { print("gradient error"); return }
+        chartDataSet.fill = Fill.fillWithLinearGradient(gradient, angle: 90.0)
+        chartDataSet.drawFilledEnabled = true
         
         // Axes setup
         let formatter: ChartFormatter = ChartFormatter()
