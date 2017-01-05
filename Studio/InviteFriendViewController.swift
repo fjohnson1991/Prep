@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  InviteFriendViewController.swift
 //  Studio
 //
 //  Created by Felicity Johnson on 1/2/17.
