@@ -13,12 +13,6 @@ class InviteFriendViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     @IBAction func inviteFriend(_ sender: Any) {
@@ -34,7 +28,6 @@ class InviteFriendViewController: UIViewController {
         linkProperties.feature = "sharing"
         linkProperties.addControlParam("$ios_url", withValue: "com.Studio.DeepLink")
         
-        
         branchUniversalObject.getShortUrl(with: linkProperties) { (url, error) in
             if error == nil {
                 print("got my Branch link to share: %@", url)
@@ -43,10 +36,6 @@ class InviteFriendViewController: UIViewController {
         
         branchUniversalObject.showShareSheet(with: linkProperties, andShareText: "Come workout with me at Studio!", from: self) { (activityType, completed) in
         }
-        
-        print(branchUniversalObject)
-        
     }
-
 }
 

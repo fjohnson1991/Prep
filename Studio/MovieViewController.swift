@@ -17,7 +17,12 @@ class MovieViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+    
+        configVideo()
+    }
+    
+    func configVideo() {
+        
         guard let url: URL = URL(string: "https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4") else { print("video URL error"); return }
         player = AVPlayer(url: url)
         controller.player = player
@@ -26,21 +31,4 @@ class MovieViewController: UIViewController {
         self.addChildViewController(controller)
         player.play()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
