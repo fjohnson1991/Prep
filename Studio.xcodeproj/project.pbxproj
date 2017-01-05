@@ -10,6 +10,8 @@
 		63AE9C8B5F8AD43EB9A19AF9 /* Pods_Studio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01BED6A852FAF9A61220699E /* Pods_Studio.framework */; };
 		B55031B61E1DA3FB004B0E25 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55031B51E1DA3FB004B0E25 /* ChartViewController.swift */; };
 		B55AA8BC1E1C4FAF0036BE7B /* MovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55AA8BB1E1C4FAF0036BE7B /* MovieViewController.swift */; };
+		B55C507C1E1EB9C100FB234A /* LineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55C507B1E1EB9C100FB234A /* LineChart.swift */; };
+		B55C507E1E1EBAA300FB234A /* CubicChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55C507D1E1EBAA300FB234A /* CubicChart.swift */; };
 		B57412C91E1EA2DF0082C1A7 /* CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57412C81E1EA2DF0082C1A7 /* CustomColor.swift */; };
 		B57412CB1E1EAE340082C1A7 /* BarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57412CA1E1EAE340082C1A7 /* BarChart.swift */; };
 		B5F56BC41E1B09A000BBA975 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F56BC31E1B09A000BBA975 /* AppDelegate.swift */; };
@@ -26,6 +28,8 @@
 		9C0EB65CA1F0AA5AED6B2228 /* Pods-Studio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studio.release.xcconfig"; path = "Pods/Target Support Files/Pods-Studio/Pods-Studio.release.xcconfig"; sourceTree = "<group>"; };
 		B55031B51E1DA3FB004B0E25 /* ChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		B55AA8BB1E1C4FAF0036BE7B /* MovieViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieViewController.swift; sourceTree = "<group>"; };
+		B55C507B1E1EB9C100FB234A /* LineChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineChart.swift; sourceTree = "<group>"; };
+		B55C507D1E1EBAA300FB234A /* CubicChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CubicChart.swift; sourceTree = "<group>"; };
 		B57412C81E1EA2DF0082C1A7 /* CustomColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomColor.swift; sourceTree = "<group>"; };
 		B57412CA1E1EAE340082C1A7 /* BarChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarChart.swift; sourceTree = "<group>"; };
 		B5F56BC01E1B09A000BBA975 /* Studio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Studio.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,6 +64,36 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		B55C507F1E1EBBF300FB234A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B57412CA1E1EAE340082C1A7 /* BarChart.swift */,
+				B55C507B1E1EB9C100FB234A /* LineChart.swift */,
+				B55C507D1E1EBAA300FB234A /* CubicChart.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		B55C50801E1EBC0000FB234A /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B5F56BC51E1B09A000BBA975 /* InviteFriendViewController.swift */,
+				B55AA8BB1E1C4FAF0036BE7B /* MovieViewController.swift */,
+				B55031B51E1DA3FB004B0E25 /* ChartViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		B55C50811E1EBC1000FB234A /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				B5F56BD51E1BD73200BBA975 /* Constants.swift */,
+				B57412C81E1EA2DF0082C1A7 /* CustomColor.swift */,
+				B5F56BC31E1B09A000BBA975 /* AppDelegate.swift */,
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
 		B5F56BB71E1B099F00BBA975 = {
 			isa = PBXGroup;
 			children = (
@@ -82,13 +116,9 @@
 			isa = PBXGroup;
 			children = (
 				B5F56BD71E1BD8F200BBA975 /* Studio.entitlements */,
-				B5F56BD51E1BD73200BBA975 /* Constants.swift */,
-				B57412C81E1EA2DF0082C1A7 /* CustomColor.swift */,
-				B5F56BC31E1B09A000BBA975 /* AppDelegate.swift */,
-				B5F56BC51E1B09A000BBA975 /* InviteFriendViewController.swift */,
-				B55AA8BB1E1C4FAF0036BE7B /* MovieViewController.swift */,
-				B55031B51E1DA3FB004B0E25 /* ChartViewController.swift */,
-				B57412CA1E1EAE340082C1A7 /* BarChart.swift */,
+				B55C507F1E1EBBF300FB234A /* Views */,
+				B55C50801E1EBC0000FB234A /* Controllers */,
+				B55C50811E1EBC1000FB234A /* Other */,
 				B5F56BC71E1B09A000BBA975 /* Main.storyboard */,
 				B5F56BCA1E1B09A000BBA975 /* Assets.xcassets */,
 				B5F56BCC1E1B09A000BBA975 /* LaunchScreen.storyboard */,
@@ -236,8 +266,10 @@
 			files = (
 				B5F56BC61E1B09A000BBA975 /* InviteFriendViewController.swift in Sources */,
 				B55AA8BC1E1C4FAF0036BE7B /* MovieViewController.swift in Sources */,
+				B55C507E1E1EBAA300FB234A /* CubicChart.swift in Sources */,
 				B57412C91E1EA2DF0082C1A7 /* CustomColor.swift in Sources */,
 				B55031B61E1DA3FB004B0E25 /* ChartViewController.swift in Sources */,
+				B55C507C1E1EB9C100FB234A /* LineChart.swift in Sources */,
 				B57412CB1E1EAE340082C1A7 /* BarChart.swift in Sources */,
 				B5F56BC41E1B09A000BBA975 /* AppDelegate.swift in Sources */,
 				B5F56BD61E1BD73200BBA975 /* Constants.swift in Sources */,
