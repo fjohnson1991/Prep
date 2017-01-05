@@ -16,14 +16,23 @@ class ChartViewController: UIViewController {
     let barChartView = BarChartView()
     var dataEntry: [BarChartDataEntry] = []
     
-    // Bar chart data
+    // Line graph properties
+    let lineChartView = LineChartView()
+    var lineDataEntry: [ChartDataEntry] = []
+    
+    // Chart data
     var workoutDuration = [String]()
     var beatsPerMinute = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        barChartSetup()
+        // Populate chart data
+        workoutDuration = ["1","2","3","4","5","6","7","8","9","10"]
+        beatsPerMinute = ["76","150", "160", "180", "195", "195", "180", "164", "136", "112"]
+        
+        //barChartSetup()
+        lineChartSetup()
     }
     
     func barChartSetup() {
@@ -36,23 +45,22 @@ class ChartViewController: UIViewController {
         barChartView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
         barChartView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         barChartView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-        
-        // Bar chart data
-        workoutDuration = ["1","2","3","4","5","6","7","8","9","10"]
-        beatsPerMinute = ["76","150", "160", "180", "195", "195", "180", "164", "136", "112"]
+
+        // Bar chart animation
+        barChartView.animate(xAxisDuration: 2.0, yAxisDuration: 2.0, easingOption: .easeInBounce)
         
         // Bar chart population
-        setChart(dataPoints: workoutDuration, values: beatsPerMinute)
+        setBarChart(dataPoints: workoutDuration, values: beatsPerMinute)
     }
     
-    func setChart(dataPoints: [String], values: [String]) {
+    func setBarChart(dataPoints: [String], values: [String]) {
     
         // No data setup
         barChartView.noDataTextColor = UIColor.white
         barChartView.noDataText = "No data for the chart."
         barChartView.backgroundColor = UIColor.white
         
-        // Data point setup
+        // Data point setup & color config
         for i in 0..<dataPoints.count {
             let dataPoint = BarChartDataEntry(x: Double(i), y: Double(values[i])!)
             dataEntry.append(dataPoint)
@@ -62,9 +70,10 @@ class ChartViewController: UIViewController {
         let chartData = BarChartData()
         chartData.addDataSet(chartDataSet)
         chartData.setDrawValues(false) // true if want values above bar
-        
+        chartDataSet.colors = [UIColor(red: 255/255, green: 0/255, blue: 102/255, alpha: 1)]
+
         // Axes setup
-        let formatter:BarChartFormatter = BarChartFormatter()
+        let formatter: ChartFormatter = ChartFormatter()
         formatter.setValues(values: dataPoints)
         let xaxis:XAxis = XAxis()
         xaxis.valueFormatter = formatter
@@ -78,11 +87,67 @@ class ChartViewController: UIViewController {
         barChartView.leftAxis.drawLabelsEnabled = true
         barChartView.data = chartData
     }
+    
+    func lineChartSetup() {
+        
+        // Line chart config
+        self.view.backgroundColor = UIColor.white
+        view.addSubview(lineChartView)
+        lineChartView.translatesAutoresizingMaskIntoConstraints = false
+        lineChartView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 20).isActive = true
+        lineChartView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        lineChartView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        lineChartView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        
+        // Line chart animation
+        lineChartView.animate(xAxisDuration: 2.0, yAxisDuration: 2.0, easingOption: .easeInSine)
+        
+        // Line chart population
+        setLineChart(dataPoints: workoutDuration, values: beatsPerMinute)
+    }
+    
+    func setLineChart(dataPoints: [String], values: [String]) {
+        
+        // No data setup
+        lineChartView.noDataTextColor = UIColor.white
+        lineChartView.noDataText = "No data for the chart."
+        lineChartView.backgroundColor = UIColor.white
+        
+        // Data point setup & color config
+        for i in 0..<dataPoints.count {
+            let dataPoint = ChartDataEntry(x: Double(i), y: Double(values[i])!)
+            lineDataEntry.append(dataPoint)
+        }
+        
+        let chartDataSet = LineChartDataSet(values: lineDataEntry, label: "BPM")
+        let chartData = LineChartData()
+        chartData.addDataSet(chartDataSet)
+        chartData.setDrawValues(true) // false if don't want values above bar
+        chartDataSet.colors = [UIColor(red: 255/255, green: 0/255, blue: 102/255, alpha: 1)]
+        chartDataSet.setCircleColor(UIColor(red: 255/255, green: 0/255, blue: 102/255, alpha: 1))
+        chartDataSet.circleHoleColor = UIColor(red: 255/255, green: 0/255, blue: 102/255, alpha: 1)
+        chartDataSet.circleRadius = 4.0
+        
+        // Axes setup
+        let formatter: ChartFormatter = ChartFormatter()
+        formatter.setValues(values: dataPoints)
+        let xaxis:XAxis = XAxis()
+        xaxis.valueFormatter = formatter
+        lineChartView.xAxis.labelPosition = .bottom
+        lineChartView.xAxis.drawGridLinesEnabled = false // true if want X-Axis grid lines
+        lineChartView.xAxis.valueFormatter = xaxis.valueFormatter
+        lineChartView.chartDescription?.enabled = false
+        lineChartView.legend.enabled = true
+        lineChartView.rightAxis.enabled = false
+        lineChartView.leftAxis.drawGridLinesEnabled = false // true if want Y-Axis grid lines
+        lineChartView.leftAxis.drawLabelsEnabled = true
+        lineChartView.data = chartData
+    }
 }
 
-// MARK: - BarChartFormatter required to config xaxis
+// MARK: - ChartFormatter required to config xaxis
 
-public class BarChartFormatter: NSObject, IAxisValueFormatter {
+public class ChartFormatter: NSObject, IAxisValueFormatter {
     
     var workoutDuration = [String]()
 
