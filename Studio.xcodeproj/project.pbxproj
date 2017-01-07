@@ -12,10 +12,13 @@
 		B55AA8BC1E1C4FAF0036BE7B /* MovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55AA8BB1E1C4FAF0036BE7B /* MovieViewController.swift */; };
 		B55C507C1E1EB9C100FB234A /* LineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55C507B1E1EB9C100FB234A /* LineChart.swift */; };
 		B55C507E1E1EBAA300FB234A /* CubicChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55C507D1E1EBAA300FB234A /* CubicChart.swift */; };
+		B55C50AC1E2070AE00FB234A /* HeartRateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55C50AB1E2070AE00FB234A /* HeartRateViewController.swift */; };
+		B55C50AE1E21448100FB234A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55C50AD1E21448100FB234A /* User.swift */; };
+		B55C50B11E21452500FB234A /* ExerciseClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55C50B01E21452500FB234A /* ExerciseClass.swift */; };
+		B55C50B31E214CDD00FB234A /* FirebaseMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55C50B21E214CDC00FB234A /* FirebaseMethods.swift */; };
 		B57412C91E1EA2DF0082C1A7 /* CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57412C81E1EA2DF0082C1A7 /* CustomColor.swift */; };
 		B57412CB1E1EAE340082C1A7 /* BarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57412CA1E1EAE340082C1A7 /* BarChart.swift */; };
 		B5F56BC41E1B09A000BBA975 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F56BC31E1B09A000BBA975 /* AppDelegate.swift */; };
-		B5F56BC61E1B09A000BBA975 /* InviteFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F56BC51E1B09A000BBA975 /* InviteFriendViewController.swift */; };
 		B5F56BC91E1B09A000BBA975 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5F56BC71E1B09A000BBA975 /* Main.storyboard */; };
 		B5F56BCB1E1B09A000BBA975 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5F56BCA1E1B09A000BBA975 /* Assets.xcassets */; };
 		B5F56BCE1E1B09A000BBA975 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5F56BCC1E1B09A000BBA975 /* LaunchScreen.storyboard */; };
@@ -30,11 +33,14 @@
 		B55AA8BB1E1C4FAF0036BE7B /* MovieViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieViewController.swift; sourceTree = "<group>"; };
 		B55C507B1E1EB9C100FB234A /* LineChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineChart.swift; sourceTree = "<group>"; };
 		B55C507D1E1EBAA300FB234A /* CubicChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CubicChart.swift; sourceTree = "<group>"; };
+		B55C50AB1E2070AE00FB234A /* HeartRateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeartRateViewController.swift; sourceTree = "<group>"; };
+		B55C50AD1E21448100FB234A /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		B55C50B01E21452500FB234A /* ExerciseClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseClass.swift; sourceTree = "<group>"; };
+		B55C50B21E214CDC00FB234A /* FirebaseMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseMethods.swift; sourceTree = "<group>"; };
 		B57412C81E1EA2DF0082C1A7 /* CustomColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomColor.swift; sourceTree = "<group>"; };
 		B57412CA1E1EAE340082C1A7 /* BarChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarChart.swift; sourceTree = "<group>"; };
 		B5F56BC01E1B09A000BBA975 /* Studio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Studio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5F56BC31E1B09A000BBA975 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B5F56BC51E1B09A000BBA975 /* InviteFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteFriendViewController.swift; sourceTree = "<group>"; };
 		B5F56BC81E1B09A000BBA975 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B5F56BCA1E1B09A000BBA975 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B5F56BCD1E1B09A000BBA975 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -77,9 +83,9 @@
 		B55C50801E1EBC0000FB234A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				B5F56BC51E1B09A000BBA975 /* InviteFriendViewController.swift */,
 				B55AA8BB1E1C4FAF0036BE7B /* MovieViewController.swift */,
 				B55031B51E1DA3FB004B0E25 /* ChartViewController.swift */,
+				B55C50AB1E2070AE00FB234A /* HeartRateViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -92,6 +98,16 @@
 				B5F56BC31E1B09A000BBA975 /* AppDelegate.swift */,
 			);
 			name = Other;
+			sourceTree = "<group>";
+		};
+		B55C50AF1E21448800FB234A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B55C50AD1E21448100FB234A /* User.swift */,
+				B55C50B01E21452500FB234A /* ExerciseClass.swift */,
+				B55C50B21E214CDC00FB234A /* FirebaseMethods.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		B5F56BB71E1B099F00BBA975 = {
@@ -116,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				B5F56BD71E1BD8F200BBA975 /* Studio.entitlements */,
+				B55C50AF1E21448800FB234A /* Model */,
 				B55C507F1E1EBBF300FB234A /* Views */,
 				B55C50801E1EBC0000FB234A /* Controllers */,
 				B55C50811E1EBC1000FB234A /* Other */,
@@ -264,14 +281,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5F56BC61E1B09A000BBA975 /* InviteFriendViewController.swift in Sources */,
 				B55AA8BC1E1C4FAF0036BE7B /* MovieViewController.swift in Sources */,
+				B55C50B31E214CDD00FB234A /* FirebaseMethods.swift in Sources */,
 				B55C507E1E1EBAA300FB234A /* CubicChart.swift in Sources */,
 				B57412C91E1EA2DF0082C1A7 /* CustomColor.swift in Sources */,
 				B55031B61E1DA3FB004B0E25 /* ChartViewController.swift in Sources */,
 				B55C507C1E1EB9C100FB234A /* LineChart.swift in Sources */,
 				B57412CB1E1EAE340082C1A7 /* BarChart.swift in Sources */,
+				B55C50AC1E2070AE00FB234A /* HeartRateViewController.swift in Sources */,
+				B55C50B11E21452500FB234A /* ExerciseClass.swift in Sources */,
 				B5F56BC41E1B09A000BBA975 /* AppDelegate.swift in Sources */,
+				B55C50AE1E21448100FB234A /* User.swift in Sources */,
 				B5F56BD61E1BD73200BBA975 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

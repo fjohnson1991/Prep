@@ -1,9 +1,4 @@
 PODS:
-  - Branch (0.12.20):
-    - Branch/Core (= 0.12.20)
-    - Branch/without-IDFA (= 0.12.20)
-  - Branch/Core (0.12.20)
-  - Branch/without-IDFA (0.12.20)
   - Charts/Core (3.0.1)
   - Charts/Realm (3.0.1):
     - Charts/Core
@@ -15,15 +10,13 @@ PODS:
     - Realm (= 1.1.0)
 
 DEPENDENCIES:
-  - Branch
   - Charts/Realm
 
 SPEC CHECKSUMS:
-  Branch: a2c085213fd3953c241ad63aa49f4435bfc84da7
   Charts: 0e84f4418e87dad6a9edde221fba37ebb51d3ba7
   Realm: ceecf1a4540c4ce9efe196fe73fa9855bce05bd8
   RealmSwift: 838058b2db95b12cb86bd0cf209df642c33fb60a
 
-PODFILE CHECKSUM: 026220a2558c1829bf8d6cd9d4a6ec5fb76a3905
+PODFILE CHECKSUM: 5cde56c479bbb1e4de285b60b73006b604274b29
 
 COCOAPODS: 1.1.1

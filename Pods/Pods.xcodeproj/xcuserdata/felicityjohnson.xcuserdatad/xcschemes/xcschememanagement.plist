@@ -4,11 +4,6 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Branch.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Charts.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -32,17 +27,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0E17C331F60E0C827C3BF7930422445D</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>24712DEB79F57D28F03EA1359679BACF</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>369EF742881B80867478B341F6311405</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -53,6 +38,11 @@
 			<true/>
 		</dict>
 		<key>699364E9658D24FF319736159FDC959C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>88EA127F027FDD74A8FEE4A8C4874C61</key>
 		<dict>
 			<key>primary</key>
 			<true/>
