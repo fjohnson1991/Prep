@@ -18,6 +18,16 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
         super.viewDidLoad()
 
         centralManager = CBCentralManager(delegate: self, queue: DispatchQueue.main)
+        
+        FirebaseMethods.getCurrentUsersLiveUpdateBPM(with: "exerciseClassID1234") { (bpm) in
+            print("LIVE UPDATE BPM: \(bpm)")
+        }
+        
+        FirebaseMethods.retrieveAllUsersInClass(with: "exerciseClassID1234") { (users) in
+            for user in users {
+                print("USER: \(user.name): \(user.bpm)")
+            }
+        }
     }
     
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
@@ -103,7 +113,6 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
     }
     
     func update(heartRateData: NSData) {
-        print("inside update heart rate data")
         var buffer = [UInt8](repeating:0, count:heartRateData.length)
         heartRateData.getBytes(&buffer, length: heartRateData.length)
         
@@ -119,7 +128,9 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
         
         if let actualBPM = bpm {
             print("Actual BPM: \(actualBPM)")
+            FirebaseMethods.sendBPMToFirebase(with: "exerciseClassID1234", bpm: "\(actualBPM)")
         } else {
+            FirebaseMethods.sendBPMToFirebase(with: "exerciseClassID1234", bpm: "\(bpm)")
             print("BPM: \(bpm)")
         }
     }
