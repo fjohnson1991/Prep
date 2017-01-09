@@ -9,16 +9,23 @@
 import UIKit
 import CoreBluetooth
 
+protocol GetUser {
+    func getUser(with user: User)
+}
+
 class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDelegate {
 
     var centralManager: CBCentralManager!
     var connectingPeripheral: CBPeripheral!
+    var classParticipant: User!
+    //let collectionView = UICollectionView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         centralManager = CBCentralManager(delegate: self, queue: DispatchQueue.main)
         
+        FirebaseMethods.removePreviousCurrentClassData()
         FirebaseMethods.getCurrentUsersLiveUpdateBPM(with: "exerciseClassID1234") { (bpm) in
             print("LIVE UPDATE BPM: \(bpm)")
         }
@@ -26,9 +33,18 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
         FirebaseMethods.retrieveAllUsersInClass(with: "exerciseClassID1234") { (users) in
             for user in users {
                 print("USER: \(user.name): \(user.bpm)")
+                self.getUser(with: user)
             }
         }
     }
+    
+    // Conform to protocol
+    
+    func getUser(with user: User) {
+        classParticipant = user
+    }
+    
+    // Bluetooth funcs
     
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         switch central.state {
@@ -128,10 +144,10 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
         
         if let actualBPM = bpm {
             print("Actual BPM: \(actualBPM)")
-            FirebaseMethods.sendBPMToFirebase(with: "exerciseClassID1234", bpm: "\(actualBPM)")
+                FirebaseMethods.sendBPMToFirebase(with: "exerciseClassID1234", bpm: "\(actualBPM)")
         } else {
-            FirebaseMethods.sendBPMToFirebase(with: "exerciseClassID1234", bpm: "\(bpm)")
             print("BPM: \(bpm)")
+            FirebaseMethods.sendBPMToFirebase(with: "exerciseClassID1234", bpm: "\(bpm)")
         }
     }
     
