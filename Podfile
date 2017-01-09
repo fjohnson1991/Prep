@@ -6,6 +6,9 @@ target 'Studio' do
   use_frameworks!
 
 pod 'Charts/Realm'
+pod 'Firebase/Core'
+pod 'Firebase/Auth'
+pod 'Firebase/Database'
 
 end
 

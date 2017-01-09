@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    let storyboard =  UIStoryboard(name: "Main", bundle: Bundle.main)
+
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         
@@ -24,6 +27,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        FIRApp.configure()
+        
+//        let currentUser = FIRAuth.auth()?.currentUser?.email
+//        
+//        if currentUser != nil {
+//            
+//            self.window?.rootViewController = self.storyboard.instantiateViewController(withIdentifier: "HeartRateViewController")
+//        }
+//        else {
+//            self.window?.rootViewController = self.storyboard.instantiateViewController(withIdentifier: "LoginViewController")
+//        }
         
         return true
     }

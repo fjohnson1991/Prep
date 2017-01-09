@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="yC9-NE-BkV">
-    <device id="retina4_7" orientation="landscape">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="9xY-42-Tr1">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -9,16 +9,37 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Login View Controller-->
+        <scene sceneID="h6r-Q7-nHK">
+            <objects>
+                <viewController storyboardIdentifier="LoginViewController" id="9xY-42-Tr1" customClass="LoginViewController" customModule="Studio" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3wi-VI-T18"/>
+                        <viewControllerLayoutGuide type="bottom" id="qbJ-uk-Xor"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="faP-4u-9XS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="yC9-NE-BkV" kind="show" identifier="videoSegue" id="Dzd-0O-aDh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4xs-ch-4ab" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="185" y="137"/>
+        </scene>
         <!--Heart Rate View Controller-->
         <scene sceneID="Kyv-hM-weI">
             <objects>
-                <viewController id="yC9-NE-BkV" customClass="HeartRateViewController" customModule="Studio" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HeartRateViewController" id="yC9-NE-BkV" customClass="HeartRateViewController" customModule="Studio" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SvB-fp-j7W"/>
                         <viewControllerLayoutGuide type="bottom" id="6eH-87-PhK"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="NYu-UM-bc2">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
