@@ -9,13 +9,15 @@
 import UIKit
 
 class BannerView: UIView {
-    
-    var bpmLabel = UILabel()
+
+    var avatarImageView = UIImageView()
     var usernameLabel = UILabel()
     var ageLabel = UILabel()
     var genderLabel = UILabel()
     var locationLabel = UILabel()
-    
+    var bpmLabel = UILabel()
+    var ageGenderLocation = UILabel()
+
     var user: User? {
         didSet {
             populateUserInfo()
@@ -34,27 +36,39 @@ class BannerView: UIView {
     
     
     private func commonInit() {
-        Bundle.main.loadNibNamed("BannerView", owner: self, options: nil)
-        backgroundColor = UIColor.clear
+        // avatarImage Config
+        self.addSubview(avatarImageView)
+        avatarImageView.translatesAutoresizingMaskIntoConstraints = false
+        avatarImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        avatarImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8).isActive = true
+        
+        // usernameLabel Config
+        self.addSubview(usernameLabel)
+        usernameLabel.translatesAutoresizingMaskIntoConstraints = false
+        usernameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 8).isActive = true
+        usernameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 8).isActive = true
+        usernameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 8).isActive = true
+        usernameLabel.textAlignment = .center
+        usernameLabel.font = UIFont(name: "Helvetica", size: 12.0)
+
+        // ageGenderLocation Config
+        self.addSubview(ageGenderLocation)
+        ageGenderLocation.translatesAutoresizingMaskIntoConstraints = false
+        ageGenderLocation.topAnchor.constraint(equalTo: usernameLabel.bottomAnchor, constant: 8).isActive = true
+        ageGenderLocation.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 8).isActive = true
+        ageGenderLocation.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 8).isActive = true
+        ageGenderLocation.textAlignment = .center
+        ageGenderLocation.font = UIFont(name: "Helvetica", size: 12.0)
         
         // bpmLabel Config
         self.addSubview(bpmLabel)
         bpmLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        // usernameLabel Config
-        
-        
-        // ageLabel Config
-        
-        
-        
-        // genderLabel Config
-        
-        
-        
-        // locationLabel Config
-        
-        
+        bpmLabel.topAnchor.constraint(equalTo: ageGenderLocation.bottomAnchor, constant: 8).isActive = true
+        bpmLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 8).isActive = true
+        bpmLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 8).isActive = true
+        bpmLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8).isActive = true
+        bpmLabel.textAlignment = .center
+        bpmLabel.font = UIFont(name: "Helvetica", size: 12.0)
     }
 }
 
@@ -70,7 +84,15 @@ extension BannerView {
     }
     
     func populateUserInfo() {
-    
+        guard let username = user?.username else { print("no username"); return }
+        guard let bpm = user?.bpm else { print("no bpm"); return }
+        guard let age = user?.age else { print("no age"); return }
+        guard let gender = user?.gender else { print("no gender"); return }
+        guard let location = user?.location else { print("no location"); return }
+        
+        avatarImageView.image = UIImage(named: "StudioIcon")
+        usernameLabel.text = username
+        ageGenderLocation.text = "\(age) / \(gender) / \(location)"
+        bpmLabel.text = bpm
     }
-    
 }
