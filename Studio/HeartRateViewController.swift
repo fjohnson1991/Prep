@@ -8,44 +8,167 @@
 
 import UIKit
 import CoreBluetooth
+import Foundation
+import AVFoundation
+import AVKit
 
-protocol GetUser {
-    func getUser(with user: User)
-}
-
-class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDelegate {
-
+class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    @IBOutlet weak var bannerCollectionView: UICollectionView!
+    
     var centralManager: CBCentralManager!
     var connectingPeripheral: CBPeripheral!
     var classParticipant: User!
-    //let collectionView = UICollectionView()
+    var totalParticipants: [User]!
+    var sectionInsets: UIEdgeInsets!
+    var itemSize: CGSize!
+    var referenceSize: CGSize!
+    var numberOfRows: CGFloat!
+    var numberOfColumns: CGFloat!
+    var convertedImage: UIImage!
+    var insetSpacing: CGFloat!
+    var minimumInterItemSpacing: CGFloat!
+    var minimumLineSpacing: CGFloat!
+    var movieView = UIView()
+    var player: AVPlayer!
+    var controller = AVPlayerViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         centralManager = CBCentralManager(delegate: self, queue: DispatchQueue.main)
         
-        FirebaseMethods.removePreviousCurrentClassData()
+        let value = UIInterfaceOrientation.landscapeLeft.rawValue
+        UIDevice.current.setValue(value, forKey: "orientation")
+        
+        movieView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(movieView)
+        movieView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        movieView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 8).isActive = true
+        movieView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        movieView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        configVideo()
+        
         FirebaseMethods.getCurrentUsersLiveUpdateBPM(with: "exerciseClassID1234") { (bpm) in
             print("LIVE UPDATE BPM: \(bpm)")
         }
         
         FirebaseMethods.retrieveAllUsersInClass(with: "exerciseClassID1234") { (users) in
-            for user in users {
-                print("USER: \(user.name): \(user.bpm)")
-                self.getUser(with: user)
-            }
+            self.totalParticipants = users
+            self.bannerCollectionView.reloadData()
+            self.cellConfig()
+            self.bannerCollectionView.delegate = self
+            self.bannerCollectionView.dataSource = self
+            self.bannerCollectionView.translatesAutoresizingMaskIntoConstraints = false
+            self.bannerCollectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -8).isActive = true
+            self.bannerCollectionView.heightAnchor.constraint(equalToConstant: 110).isActive = true
+            self.bannerCollectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+            self.bannerCollectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+            self.view.addSubview(self.bannerCollectionView)
+            self.bannerCollectionView.isUserInteractionEnabled = false
+            self.bannerCollectionView.showsHorizontalScrollIndicator = true
+        }
+        
+        FirebaseMethods.removePreviousCurrentClassData()
+        _ = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(HeartRateViewController.updateBPM), userInfo: nil, repeats: true)
+        _ = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(HeartRateViewController.autoScroll), userInfo: nil, repeats: true)
+    }
+    
+    //Movie Config
+    func configVideo() {
+        guard let url: URL = URL(string: "https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4") else { print("video URL error"); return }
+        player = AVPlayer(url: url)
+        controller.player = player
+        controller.view.frame = self.movieView.bounds
+        movieView.addSubview(controller.view)
+        player.play()
+    }
+    
+    // BPM timer update
+    func updateBPM() {
+        FirebaseMethods.retrieveAllUsersInClass(with: "exerciseClassID1234") { (users) in
+            self.totalParticipants = users
+            self.bannerCollectionView.reloadData()
         }
     }
     
-    // Conform to protocol
+    // Landscape mode
+    private func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.landscapeLeft
+    }
+    private func shouldAutorotate() -> Bool {
+        return true
+    }
     
-    func getUser(with user: User) {
-        classParticipant = user
+    // CollectionView Setup
+    func cellConfig() {
+        let screedWidth = view.frame.width
+        let screenHeight = view.frame.height
+        
+        let numOfRows = CGFloat(1.0)
+        let numOfColumns = CGFloat(3.0)
+        
+        insetSpacing = 2
+        minimumInterItemSpacing = 2
+        minimumLineSpacing = 2
+        sectionInsets = UIEdgeInsetsMake(insetSpacing, insetSpacing, insetSpacing, insetSpacing)
+        referenceSize = CGSize(width: screedWidth, height: 0)
+        
+        let totalWidthDeduction = (minimumInterItemSpacing + minimumInterItemSpacing + sectionInsets.right + sectionInsets.left)
+        let totalHeightDeduction = (sectionInsets.right + sectionInsets.left + minimumLineSpacing + minimumLineSpacing)
+        
+        itemSize = CGSize(width: (screedWidth - totalWidthDeduction)/numOfColumns, height: (screenHeight - totalHeightDeduction)/numOfRows)
+    }
+    
+    // MARK: UICollectionViewDataSource
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 1
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return totalParticipants.count
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "bannerCellIdentifier", for: indexPath) as! BannerCollectionViewCell
+        let currentPost = totalParticipants[indexPath.row]
+        cell.user = currentPost
+        return cell
+    }
+    
+    // MARK: UICollectionView continuous scrolling
+    func autoScroll() {
+//        let co = bannerCollectionView.contentOffset.x
+//        let no = co + 1
+//        
+//        UIView.animate(withDuration: 0.001, delay: 0, options: .curveEaseInOut, animations: { [weak self]() -> Void in
+//            self?.bannerCollectionView.contentOffset = CGPoint(x: no, y: 0)
+//        }) { [weak self](finished) -> Void in
+//            self?.autoScroll()
+//        }
+    }
+    
+    // MARK: UICollectionViewDelegate
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return minimumLineSpacing
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return minimumInterItemSpacing
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return sectionInsets
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return itemSize
     }
     
     // Bluetooth funcs
-    
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         switch central.state {
         case .poweredOn:
@@ -144,7 +267,7 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
         
         if let actualBPM = bpm {
             print("Actual BPM: \(actualBPM)")
-                FirebaseMethods.sendBPMToFirebase(with: "exerciseClassID1234", bpm: "\(actualBPM)")
+            FirebaseMethods.sendBPMToFirebase(with: "exerciseClassID1234", bpm: "\(actualBPM)")
         } else {
             print("BPM: \(bpm)")
             FirebaseMethods.sendBPMToFirebase(with: "exerciseClassID1234", bpm: "\(bpm)")
@@ -156,10 +279,10 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
             print("Error: \(error)")
         } else {
             switch characteristic.uuid.uuidString {
-                case "2A37":
-                    let data = NSData(data: characteristic.value!)
-                    update(heartRateData: data)
-                    print("did update value for data \(data)")
+            case "2A37":
+                let data = NSData(data: characteristic.value!)
+                update(heartRateData: data)
+                print("did update value for data \(data)")
                 
             default:
                 print("default")

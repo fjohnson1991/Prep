@@ -129,6 +129,7 @@ class FirebaseMethods {
             }
         })
     }
+
     
     //MARK: - Retrive users in current class from Firebase
     
