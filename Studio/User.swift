@@ -20,8 +20,9 @@ class User {
     var avatarIconName: String?
     var gender: String
     var age: Int
+    var location: String
     
-    init(name: String, userUniqueKey: String, previousClasses: [ExerciseClass], bpm: String, username: String, gender: String, age: Int) {
+    init(name: String, userUniqueKey: String, previousClasses: [ExerciseClass], bpm: String, username: String, gender: String, age: Int, location: String) {
         self.name = name
         self.userUniqueKey = userUniqueKey
         self.previousClasses = previousClasses
@@ -29,5 +30,6 @@ class User {
         self.username = username
         self.gender = gender
         self.age = age
+        self.location = location
     }
 }

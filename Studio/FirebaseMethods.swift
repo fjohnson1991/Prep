@@ -50,6 +50,40 @@ class FirebaseMethods {
         }
     }
     
+    //MARK: - Remove previous "current class" BPM from Firebase
+    
+    class func removePreviousCurrentClassData() {
+        guard let currentUserID = FIRAuth.auth()?.currentUser?.uid else { return }
+        let currentClassRef = FIRDatabase.database().reference().child("users").child(currentUserID).child("currentClass")
+        
+        currentClassRef.observeSingleEvent(of: .value, with: { (snapshot) in
+            if !snapshot.hasChildren() {
+                print("no BPM data")
+            } else {
+                currentClassRef.removeValue()
+            }
+        })
+        
+        
+        // included SOLELY FOR DUMMY DATA:
+        
+        FIRDatabase.database().reference().child("users").child("AboONotvV4dFoMBZaKsib8hcNtF3").child("currentClass").observeSingleEvent(of: .value, with: { (snapshot) in
+            if !snapshot.hasChildren() {
+                print("no BPM data")
+            } else {
+                currentClassRef.removeValue()
+            }
+        })
+        
+        FIRDatabase.database().reference().child("users").child("AboONotvV4dFoMBZaKsib8hcNtF4").child("currentClass").observeSingleEvent(of: .value, with: { (snapshot) in
+            if !snapshot.hasChildren() {
+                print("no BPM data")
+            } else {
+                currentClassRef.removeValue()
+            }
+        })
+    }
+    
     //MARK: - Send BPM to Firebase
     
     class func sendBPMToFirebase(with exerciseClassUniqueKey: String, bpm: String) {
@@ -59,16 +93,17 @@ class FirebaseMethods {
         let previousClassRef = FIRDatabase.database().reference().child("users").child(currentUserID).child("previousClasses").child(exerciseClassUniqueKey).child("BPM")
         let bpmKey = FIRDatabase.database().reference().childByAutoId().key
         let timeStamp = Date().timeIntervalSince1970.description
+        let valuesToUpdate = ["timestamp": timeStamp, "value" : "\(bpm)"]
         
-        currentClassRef.updateChildValues([bpmKey : ["timestamp": timeStamp, "value" : "\(bpm)"]])
+        currentClassRef.updateChildValues([bpmKey: valuesToUpdate])
         recentClassRef.updateChildValues(["recentBPM" : "\(bpm)"])
         previousClassRef.updateChildValues([bpmKey : ["timestamp": timeStamp, "value" : "\(bpm)"]])
         
         // included SOLELY FOR DUMMY DATA:
-        FIRDatabase.database().reference().child("users").child("AboONotvV4dFoMBZaKsib8hcNtF3").child("currentClass").updateChildValues([bpmKey : ["timestamp": timeStamp, "value" : "\(bpm)"]])
+        FIRDatabase.database().reference().child("users").child("AboONotvV4dFoMBZaKsib8hcNtF3").child("currentClass").updateChildValues([bpmKey: valuesToUpdate])
         FIRDatabase.database().reference().child("users").child("AboONotvV4dFoMBZaKsib8hcNtF3").updateChildValues(["recentBPM" : "\(bpm)"])
         
-        FIRDatabase.database().reference().child("users").child("AboONotvV4dFoMBZaKsib8hcNtF4").child("currentClass").updateChildValues([bpmKey : ["timestamp": timeStamp, "value" : "\(bpm)"]])
+        FIRDatabase.database().reference().child("users").child("AboONotvV4dFoMBZaKsib8hcNtF4").child("currentClass").updateChildValues([bpmKey: valuesToUpdate])
         FIRDatabase.database().reference().child("users").child("AboONotvV4dFoMBZaKsib8hcNtF4").updateChildValues(["recentBPM" : "\(bpm)"])
         
     }
@@ -95,6 +130,8 @@ class FirebaseMethods {
         })
     }
     
+    //MARK: - Retrive users in current class from Firebase
+    
     class func retrieveAllUsersInClass(with exerciseClassUniqueKey: String, completion: @escaping ([User]) -> Void) {
         let userClassRef = FIRDatabase.database().reference().child("users")
         var users = [User]()
@@ -113,11 +150,12 @@ class FirebaseMethods {
                         let userUniqueKey = userInfo["userUniqueKey"] as? String,
                         let gender = userInfo["gender"] as? String,
                         let age = userInfo["age"] as? String,
+                        let location = userInfo["location"] as? String,
                         let currentClass = userInfo["currentClass"] as? [String: Any],
                         let recentBPM = userInfo["recentBPM"] as? String
-                    else { return }
+                        else { return }
                     
-                    let user = User(name: name, userUniqueKey: userUniqueKey, previousClasses: [], bpm: recentBPM, username: username, gender: gender, age: Int(age)!)
+                    let user = User(name: name, userUniqueKey: userUniqueKey, previousClasses: [], bpm: recentBPM, username: username, gender: gender, age: Int(age)!, location: location)
                     users.append(user)
                     
                     if users.count == snapshotValue.count {
