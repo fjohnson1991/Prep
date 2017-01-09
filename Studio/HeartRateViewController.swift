@@ -8,10 +8,9 @@
 
 import UIKit
 import CoreBluetooth
-
-protocol GetUser {
-    func getUser(with user: User)
-}
+import Foundation
+import AVFoundation
+import AVKit
 
 class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource {
     
@@ -30,6 +29,9 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
     var insetSpacing: CGFloat!
     var minimumInterItemSpacing: CGFloat!
     var minimumLineSpacing: CGFloat!
+    var movieView = UIView()
+    var player: AVPlayer!
+    var controller = AVPlayerViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +40,14 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
         
         let value = UIInterfaceOrientation.landscapeLeft.rawValue
         UIDevice.current.setValue(value, forKey: "orientation")
+        
+        movieView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(movieView)
+        movieView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        movieView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 8).isActive = true
+        movieView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        movieView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        configVideo()
         
         FirebaseMethods.getCurrentUsersLiveUpdateBPM(with: "exerciseClassID1234") { (bpm) in
             print("LIVE UPDATE BPM: \(bpm)")
@@ -56,13 +66,33 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
             self.bannerCollectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
             self.view.addSubview(self.bannerCollectionView)
             self.bannerCollectionView.isUserInteractionEnabled = false
+            self.bannerCollectionView.showsHorizontalScrollIndicator = true
         }
         
         FirebaseMethods.removePreviousCurrentClassData()
+        _ = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(HeartRateViewController.updateBPM), userInfo: nil, repeats: true)
+        _ = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(HeartRateViewController.autoScroll), userInfo: nil, repeats: true)
+    }
+    
+    //Movie Config
+    func configVideo() {
+        guard let url: URL = URL(string: "https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4") else { print("video URL error"); return }
+        player = AVPlayer(url: url)
+        controller.player = player
+        controller.view.frame = self.movieView.bounds
+        movieView.addSubview(controller.view)
+        player.play()
+    }
+    
+    // BPM timer update
+    func updateBPM() {
+        FirebaseMethods.retrieveAllUsersInClass(with: "exerciseClassID1234") { (users) in
+            self.totalParticipants = users
+            self.bannerCollectionView.reloadData()
+        }
     }
     
     // Landscape mode
-    
     private func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         return UIInterfaceOrientationMask.landscapeLeft
     }
@@ -70,14 +100,7 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
         return true
     }
     
-    // Conform to protocol
-    
-    func getUser(with user: User) {
-        classParticipant = user
-    }
-    
     // CollectionView Setup
-    
     func cellConfig() {
         let screedWidth = view.frame.width
         let screenHeight = view.frame.height
@@ -95,11 +118,9 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
         let totalHeightDeduction = (sectionInsets.right + sectionInsets.left + minimumLineSpacing + minimumLineSpacing)
         
         itemSize = CGSize(width: (screedWidth - totalWidthDeduction)/numOfColumns, height: (screenHeight - totalHeightDeduction)/numOfRows)
-        
     }
     
     // MARK: UICollectionViewDataSource
-    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
@@ -112,15 +133,25 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        print("CELL EXISTS")
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "bannerCellIdentifier", for: indexPath) as! BannerCollectionViewCell
         let currentPost = totalParticipants[indexPath.row]
         cell.user = currentPost
         return cell
     }
     
-    // MARK: UICollectionViewDelegate
+    // MARK: UICollectionView continuous scrolling
+    func autoScroll() {
+//        let co = bannerCollectionView.contentOffset.x
+//        let no = co + 1
+//        
+//        UIView.animate(withDuration: 0.001, delay: 0, options: .curveEaseInOut, animations: { [weak self]() -> Void in
+//            self?.bannerCollectionView.contentOffset = CGPoint(x: no, y: 0)
+//        }) { [weak self](finished) -> Void in
+//            self?.autoScroll()
+//        }
+    }
     
+    // MARK: UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return minimumLineSpacing
     }
@@ -138,7 +169,6 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
     }
     
     // Bluetooth funcs
-    
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         switch central.state {
         case .poweredOn:

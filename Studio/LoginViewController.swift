@@ -72,7 +72,6 @@ class LoginViewController: UIViewController {
         UIView.animate(withDuration: 0.25, animations: {
             view.center.y = self.view.center.y
         }) { (success) in
-            print(success)
         }
     }
     
@@ -277,8 +276,7 @@ extension LoginViewController {
             self.newuserButton.isHidden = true
             self.newuserButton.isUserInteractionEnabled = true
             self.cancelButton.isUserInteractionEnabled = true
-        }
-        
+        }        
     }
     
     func animateForLogin() {

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		63AE9C8B5F8AD43EB9A19AF9 /* Pods_Studio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01BED6A852FAF9A61220699E /* Pods_Studio.framework */; };
-		B507906F1E231F1A00AADA17 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B507906E1E231F1A00AADA17 /* BannerView.swift */; };
 		B55031B61E1DA3FB004B0E25 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55031B51E1DA3FB004B0E25 /* ChartViewController.swift */; };
 		B55AA8BC1E1C4FAF0036BE7B /* MovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55AA8BB1E1C4FAF0036BE7B /* MovieViewController.swift */; };
 		B55C507C1E1EB9C100FB234A /* LineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55C507B1E1EB9C100FB234A /* LineChart.swift */; };
@@ -35,7 +34,6 @@
 		01BED6A852FAF9A61220699E /* Pods_Studio.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Studio.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C5496F5C71C701CB921559A /* Pods-Studio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studio.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Studio/Pods-Studio.debug.xcconfig"; sourceTree = "<group>"; };
 		9C0EB65CA1F0AA5AED6B2228 /* Pods-Studio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studio.release.xcconfig"; path = "Pods/Target Support Files/Pods-Studio/Pods-Studio.release.xcconfig"; sourceTree = "<group>"; };
-		B507906E1E231F1A00AADA17 /* BannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		B55031B51E1DA3FB004B0E25 /* ChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		B55AA8BB1E1C4FAF0036BE7B /* MovieViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieViewController.swift; sourceTree = "<group>"; };
 		B55C507B1E1EB9C100FB234A /* LineChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineChart.swift; sourceTree = "<group>"; };
@@ -87,7 +85,6 @@
 			children = (
 				B57412CA1E1EAE340082C1A7 /* BarChart.swift */,
 				B59A1BF71E23D4F700A7799F /* BannerCollectionViewCell.swift */,
-				B507906E1E231F1A00AADA17 /* BannerView.swift */,
 				B55C507B1E1EB9C100FB234A /* LineChart.swift */,
 				B55C507D1E1EBAA300FB234A /* CubicChart.swift */,
 			);
@@ -312,7 +309,6 @@
 				B55C50AC1E2070AE00FB234A /* HeartRateViewController.swift in Sources */,
 				B55C50B11E21452500FB234A /* ExerciseClass.swift in Sources */,
 				B5F56BC41E1B09A000BBA975 /* AppDelegate.swift in Sources */,
-				B507906F1E231F1A00AADA17 /* BannerView.swift in Sources */,
 				B55C50AE1E21448100FB234A /* User.swift in Sources */,
 				B5CF59561E21742200D6AA0E /* LoginViewController.swift in Sources */,
 				B5F56BD61E1BD73200BBA975 /* Constants.swift in Sources */,

@@ -73,6 +73,7 @@ class BannerCollectionViewCell: UICollectionViewCell {
     }
     
     func populateUserInfo() {
+        
         guard let username = user?.username else { print("no username"); return }
         guard let bpm = user?.bpm else { print("no bpm"); return }
         guard let age = user?.age else { print("no age"); return }
