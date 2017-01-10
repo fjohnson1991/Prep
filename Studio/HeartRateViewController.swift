@@ -32,6 +32,7 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
     var movieView = UIView()
     var player: AVPlayer!
     var controller = AVPlayerViewController()
+    var bannerAlphaLayer = UIView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,18 +42,19 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
         let value = UIInterfaceOrientation.landscapeLeft.rawValue
         UIDevice.current.setValue(value, forKey: "orientation")
         
-        movieView.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(movieView)
-        movieView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-        movieView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 8).isActive = true
-        movieView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-        movieView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-        configVideo()
-        
         FirebaseMethods.getCurrentUsersLiveUpdateBPM(with: "exerciseClassID1234") { (bpm) in
             print("LIVE UPDATE BPM: \(bpm)")
         }
         
+        configViews()
+        
+        FirebaseMethods.removePreviousCurrentClassData()
+        _ = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(HeartRateViewController.updateBPM), userInfo: nil, repeats: true)
+        _ = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(HeartRateViewController.autoScroll), userInfo: nil, repeats: true)
+    }
+    
+    //Config view
+    func configViews() {
         FirebaseMethods.retrieveAllUsersInClass(with: "exerciseClassID1234") { (users) in
             self.totalParticipants = users
             self.bannerCollectionView.reloadData()
@@ -60,18 +62,22 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
             self.bannerCollectionView.delegate = self
             self.bannerCollectionView.dataSource = self
             self.bannerCollectionView.translatesAutoresizingMaskIntoConstraints = false
-            self.bannerCollectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -8).isActive = true
+            self.bannerCollectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
             self.bannerCollectionView.heightAnchor.constraint(equalToConstant: 110).isActive = true
             self.bannerCollectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
             self.bannerCollectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
             self.view.addSubview(self.bannerCollectionView)
             self.bannerCollectionView.isUserInteractionEnabled = false
             self.bannerCollectionView.showsHorizontalScrollIndicator = true
+            
+            self.movieView.translatesAutoresizingMaskIntoConstraints = false
+            self.view.addSubview(self.movieView)
+            self.movieView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+            self.movieView.bottomAnchor.constraint(equalTo: self.bannerCollectionView.topAnchor, constant: 8).isActive = true
+            self.movieView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+            self.movieView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+            self.configVideo()
         }
-        
-        FirebaseMethods.removePreviousCurrentClassData()
-        _ = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(HeartRateViewController.updateBPM), userInfo: nil, repeats: true)
-        _ = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(HeartRateViewController.autoScroll), userInfo: nil, repeats: true)
     }
     
     //Movie Config
@@ -108,11 +114,11 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
         let numOfRows = CGFloat(1.0)
         let numOfColumns = CGFloat(3.0)
         
-        insetSpacing = 2
-        minimumInterItemSpacing = 2
-        minimumLineSpacing = 2
+        insetSpacing = 0
+        minimumInterItemSpacing = 0
+        minimumLineSpacing = 0
         sectionInsets = UIEdgeInsetsMake(insetSpacing, insetSpacing, insetSpacing, insetSpacing)
-        referenceSize = CGSize(width: screedWidth, height: 0)
+        referenceSize = CGSize(width: screedWidth, height: 100)
         
         let totalWidthDeduction = (minimumInterItemSpacing + minimumInterItemSpacing + sectionInsets.right + sectionInsets.left)
         let totalHeightDeduction = (sectionInsets.right + sectionInsets.left + minimumLineSpacing + minimumLineSpacing)
