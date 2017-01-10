@@ -32,13 +32,9 @@ class BannerCollectionViewCell: UICollectionViewCell {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         configureView()
-        
     }
     
     private func configureView() {
-        
-        self.layer.backgroundColor = UIColor.black.withAlphaComponent(0.7).cgColor
-        
         // avatarImage Config
         avatarImageView.translatesAutoresizingMaskIntoConstraints = false
         avatarImageView = UIImageView(frame: CGRect(x: 20, y: 35, width: 40, height: 40))
@@ -65,7 +61,6 @@ class BannerCollectionViewCell: UICollectionViewCell {
         self.addSubview(bpmLabel)
         bpmLabel.translatesAutoresizingMaskIntoConstraints = false
         bpmLabel.heightAnchor.constraint(equalToConstant: 15).isActive = true
-        bpmLabel.textAlignment = .center
         bpmLabel.font = UIFont(name: "Helvetica", size: 12.0)
         bpmLabel.textColor = UIColor.white
         
@@ -88,7 +83,6 @@ class BannerCollectionViewCell: UICollectionViewCell {
     }
     
     func populateUserInfo() {
-        
         guard let username = user?.username else { print("no username"); return }
         guard let bpm = user?.bpm else { print("no bpm"); return }
         guard let age = user?.age else { print("no age"); return }
@@ -98,7 +92,17 @@ class BannerCollectionViewCell: UICollectionViewCell {
         avatarImageView.image = UIImage(named: "AvatarImage")
         usernameLabel.text = username
         ageGenderLocation.text = "\(age) / \(gender) / \(location)"
-        bpmLabel.text = bpm
+        
+        //bpm and image text config
+        let attachment = NSTextAttachment()
+        attachment.image = UIImage(named: "HeartrateChart")
+        let attachmentString = NSAttributedString(attachment: attachment)
+        let bpmString = NSAttributedString(string: " \(bpm)")
+        let myString = NSMutableAttributedString(string: "")
+        myString.append(attachmentString)
+        myString.append(bpmString)
+        bpmLabel.attributedText = myString
+        bpmLabel.textAlignment = .center
+        bpmLabel.attributedText = myString
     }
-
 }

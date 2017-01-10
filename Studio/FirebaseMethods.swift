@@ -114,18 +114,11 @@ class FirebaseMethods {
         guard let currentUserID = FIRAuth.auth()?.currentUser?.uid else { return }
         let currentClassRef = FIRDatabase.database().reference().child("users").child(currentUserID).child("recentBPM")
         
-        currentClassRef.observe(.childAdded, with: { (snapshot) in
-            if !snapshot.hasChildren() {
-                print("current user doesn't have BPM data")
-                completion("No data")
-            } else {
-                guard let bpm = snapshot.value as? String else {return}
-                print("COMPLETION BPM: \(bpm)")
-                completion(bpm)
-            }
+        currentClassRef.observe(.value, with: { (snapshot) in
+            guard let bpm = snapshot.value as? String else {return}
+            completion(bpm)
         })
     }
-
     
     //MARK: - Retrive users in current class from Firebase
     

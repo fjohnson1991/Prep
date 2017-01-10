@@ -33,6 +33,7 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
     var player: AVPlayer!
     var controller = AVPlayerViewController()
     var currentBPMLabel = UILabel()
+    var reverseParticipantsArray: [User]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,9 +58,11 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
             self.totalParticipants = users
             self.bannerCollectionView.reloadData()
             self.cellConfig()
+            self.configVideo()
             self.bannerCollectionView.delegate = self
             self.bannerCollectionView.dataSource = self
             self.bannerCollectionView.translatesAutoresizingMaskIntoConstraints = false
+            self.bannerCollectionView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
             self.bannerCollectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
             self.bannerCollectionView.heightAnchor.constraint(equalToConstant: 100).isActive = true
             self.bannerCollectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
@@ -67,21 +70,20 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
             self.view.addSubview(self.bannerCollectionView)
             self.bannerCollectionView.isUserInteractionEnabled = false
             self.bannerCollectionView.showsHorizontalScrollIndicator = true
-            
-            self.movieView.translatesAutoresizingMaskIntoConstraints = false
-            self.view.addSubview(self.movieView)
-            self.movieView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-            self.movieView.bottomAnchor.constraint(equalTo: self.bannerCollectionView.topAnchor, constant: 8).isActive = true
-            self.movieView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-            self.movieView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-            self.configVideo()
             self.liveBPMUpdateLabel()
         }
     }
     
     //Movie Config
     func configVideo() {
-        guard let url: URL = URL(string: "https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4") else { print("video URL error"); return }
+        self.movieView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(self.movieView)
+        self.movieView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        self.movieView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
+        self.movieView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        self.movieView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        
+        guard let url: URL = URL(string: "http://devstreaming.apple.com/videos/wwdc/2016/102w0bsn0ge83qfv7za/102/hls_vod_mvp.m3u8") else { print("video URL error"); return }
         player = AVPlayer(url: url)
         controller.player = player
         controller.view.frame = self.movieView.bounds
@@ -89,7 +91,7 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
         player.play()
     }
     
-    // BPM live update 
+    // BPM live update
     func liveBPMUpdateLabel() {
         self.currentBPMLabel.translatesAutoresizingMaskIntoConstraints = false
         self.movieView.addSubview(self.currentBPMLabel)
@@ -98,14 +100,20 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
         self.currentBPMLabel.widthAnchor.constraint(equalToConstant: 50).isActive = true
         self.currentBPMLabel.heightAnchor.constraint(equalToConstant: 35).isActive = true
         self.currentBPMLabel.layer.cornerRadius = 3.0
-        self.currentBPMLabel.layer.backgroundColor = UIColor.orange.cgColor
+        self.currentBPMLabel.layer.backgroundColor = UIColor.orange.withAlphaComponent(0.3).cgColor
         self.currentBPMLabel.textColor = UIColor.white
-        self.currentBPMLabel.font = UIFont(name: "Helvetica", size: 30)
-        self.currentBPMLabel.text = "bpm"
+        self.currentBPMLabel.font = UIFont(name: "Helvetica", size: 15)
         
         FirebaseMethods.getCurrentUsersLiveUpdateBPM { (bpm) in
-            print("BPM outside: \(bpm)")
-            self.currentBPMLabel.text = bpm
+            let attachment = NSTextAttachment()
+            attachment.image = UIImage(named: "HeartrateChart")
+            let attachmentString = NSAttributedString(attachment: attachment)
+            let bpmString = NSAttributedString(string: " \(bpm)")
+            let myString = NSMutableAttributedString(string: "")
+            myString.append(attachmentString)
+            myString.append(bpmString)
+            self.currentBPMLabel.attributedText = myString
+            self.currentBPMLabel.textAlignment = .center
         }
     }
     
@@ -164,12 +172,25 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
     }
     
     // MARK: UICollectionView continuous scrolling
-    func autoScroll() {
-//        let co = bannerCollectionView.contentOffset.x
-//        let no = co + 1
+
+//    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+//        let xMovement = bannerCollectionView.contentOffset.x
+//        let x = xMovement + 1
+//        let fullyScrolledContentOffset:CGFloat = bannerCollectionView.frame.size.width * CGFloat(totalParticipants.count - 1)
 //        
-//        UIView.animate(withDuration: 0.001, delay: 0, options: .curveEaseInOut, animations: { [weak self]() -> Void in
-//            self?.bannerCollectionView.contentOffset = CGPoint(x: no, y: 0)
+//        if (scrollView.contentOffset.x >= fullyScrolledContentOffset) {
+//            
+//        }
+//        
+//        
+//    }
+    
+    func autoScroll() {
+//        let xMovement = bannerCollectionView.contentOffset.x
+//        let x = xMovement + 1
+//
+//        UIView.animate(withDuration: 0.001, delay: 0, options: [.curveEaseInOut], animations: { [weak self]() -> Void in
+//            self?.bannerCollectionView.contentOffset = CGPoint(x: x, y: 0)
 //        }) { [weak self](finished) -> Void in
 //            self?.autoScroll()
 //        }
