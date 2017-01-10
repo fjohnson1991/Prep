@@ -110,21 +110,17 @@ class FirebaseMethods {
     
     //MARK: - Retrive BPM from Firebase
     
-    class func getCurrentUsersLiveUpdateBPM(with exerciseClassUniqueKey: String, completion: @escaping (String) -> Void) {
+    class func getCurrentUsersLiveUpdateBPM(with completion: @escaping (String) -> Void) {
         guard let currentUserID = FIRAuth.auth()?.currentUser?.uid else { return }
-        let currentClassRef = FIRDatabase.database().reference().child("users").child(currentUserID).child("currentClass").child("BPM")
+        let currentClassRef = FIRDatabase.database().reference().child("users").child(currentUserID).child("recentBPM")
         
         currentClassRef.observe(.childAdded, with: { (snapshot) in
             if !snapshot.hasChildren() {
                 print("current user doesn't have BPM data")
                 completion("No data")
             } else {
-                guard let currentClassRawInfo = snapshot.value as? [String:Any] else {return}
-                
-                guard let bpm = currentClassRawInfo["value"] as? String,
-                    let timestampString = currentClassRawInfo["timestamp"] as? String,
-                    let timestamp = Double(timestampString)
-                    else {return}
+                guard let bpm = snapshot.value as? String else {return}
+                print("COMPLETION BPM: \(bpm)")
                 completion(bpm)
             }
         })

@@ -32,7 +32,7 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
     var movieView = UIView()
     var player: AVPlayer!
     var controller = AVPlayerViewController()
-    var bannerAlphaLayer = UIView()
+    var currentBPMLabel = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,15 +42,13 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
         let value = UIInterfaceOrientation.landscapeLeft.rawValue
         UIDevice.current.setValue(value, forKey: "orientation")
         
-        FirebaseMethods.getCurrentUsersLiveUpdateBPM(with: "exerciseClassID1234") { (bpm) in
-            print("LIVE UPDATE BPM: \(bpm)")
-        }
-        
         configViews()
-        
         FirebaseMethods.removePreviousCurrentClassData()
+        
+        // timers
         _ = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(HeartRateViewController.updateBPM), userInfo: nil, repeats: true)
         _ = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(HeartRateViewController.autoScroll), userInfo: nil, repeats: true)
+        _ = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(HeartRateViewController.liveBPMUpdateLabel), userInfo: nil, repeats: true)
     }
     
     //Config view
@@ -63,7 +61,7 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
             self.bannerCollectionView.dataSource = self
             self.bannerCollectionView.translatesAutoresizingMaskIntoConstraints = false
             self.bannerCollectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
-            self.bannerCollectionView.heightAnchor.constraint(equalToConstant: 110).isActive = true
+            self.bannerCollectionView.heightAnchor.constraint(equalToConstant: 100).isActive = true
             self.bannerCollectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
             self.bannerCollectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
             self.view.addSubview(self.bannerCollectionView)
@@ -77,6 +75,7 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
             self.movieView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
             self.movieView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
             self.configVideo()
+            self.liveBPMUpdateLabel()
         }
     }
     
@@ -88,6 +87,26 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
         controller.view.frame = self.movieView.bounds
         movieView.addSubview(controller.view)
         player.play()
+    }
+    
+    // BPM live update 
+    func liveBPMUpdateLabel() {
+        self.currentBPMLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.movieView.addSubview(self.currentBPMLabel)
+        self.currentBPMLabel.topAnchor.constraint(equalTo: self.movieView.topAnchor, constant: 20).isActive = true
+        self.currentBPMLabel.leadingAnchor.constraint(equalTo: self.movieView.leadingAnchor, constant: 20).isActive = true
+        self.currentBPMLabel.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        self.currentBPMLabel.heightAnchor.constraint(equalToConstant: 35).isActive = true
+        self.currentBPMLabel.layer.cornerRadius = 3.0
+        self.currentBPMLabel.layer.backgroundColor = UIColor.orange.cgColor
+        self.currentBPMLabel.textColor = UIColor.white
+        self.currentBPMLabel.font = UIFont(name: "Helvetica", size: 30)
+        self.currentBPMLabel.text = "bpm"
+        
+        FirebaseMethods.getCurrentUsersLiveUpdateBPM { (bpm) in
+            print("BPM outside: \(bpm)")
+            self.currentBPMLabel.text = bpm
+        }
     }
     
     // BPM timer update
@@ -128,7 +147,6 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
     
     // MARK: UICollectionViewDataSource
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
