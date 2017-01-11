@@ -33,7 +33,10 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
     var player: AVPlayer!
     var controller = AVPlayerViewController()
     var currentBPMLabel = UILabel()
-    var reverseParticipantsArray: [User]!
+    var invisibleButton = UIButton()
+    var isPlaying = Bool()
+    var reversetotalParticipantsArray = [User]()
+    var fullyScrolledContentOffset:CGFloat!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,8 +51,8 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
         
         // timers
         _ = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(HeartRateViewController.updateBPM), userInfo: nil, repeats: true)
-        _ = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(HeartRateViewController.autoScroll), userInfo: nil, repeats: true)
         _ = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(HeartRateViewController.liveBPMUpdateLabel), userInfo: nil, repeats: true)
+        
     }
     
     //Config view
@@ -71,6 +74,7 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
             self.bannerCollectionView.isUserInteractionEnabled = false
             self.bannerCollectionView.showsHorizontalScrollIndicator = true
             self.liveBPMUpdateLabel()
+            _ = Timer.scheduledTimer(timeInterval: 0.9, target: self, selector: #selector(HeartRateViewController.autoScroll), userInfo: nil, repeats: true)
         }
     }
     
@@ -88,7 +92,32 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
         controller.player = player
         controller.view.frame = self.movieView.bounds
         movieView.addSubview(controller.view)
+        
+        invisibleButton.translatesAutoresizingMaskIntoConstraints = false
+        movieView.addSubview(invisibleButton)
+        invisibleButton.topAnchor.constraint(equalTo: self.movieView.topAnchor).isActive = true
+        invisibleButton.bottomAnchor.constraint(equalTo: self.movieView.bottomAnchor, constant: 0).isActive = true
+        invisibleButton.leadingAnchor.constraint(equalTo: self.movieView.leadingAnchor).isActive = true
+        invisibleButton.trailingAnchor.constraint(equalTo: self.movieView.trailingAnchor).isActive = true
+        invisibleButton.addTarget(self, action: #selector(handleTapGesture(_:)), for: .touchDown)
         player.play()
+        isPlaying = true
+    }
+    
+    // Pause & play tap config
+    func handleTapGesture(_ sender: UITapGestureRecognizer) {
+        if isPlaying == true {
+            print("CURRENT PAUSE TIME: \(self.player.currentTime().value)")
+            print("pause")
+            self.player.pause()
+            self.isPlaying = false
+        } else {
+            print("CURRENT PLAY TIME: \(self.player.currentTime().value)")
+            print("play")
+            self.player.play()
+            self.isPlaying = true
+            
+        }
     }
     
     // BPM live update
@@ -160,7 +189,7 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return totalParticipants.count
+        return 3
     }
     
     
@@ -172,28 +201,13 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
     }
     
     // MARK: UICollectionView continuous scrolling
-
-//    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
-//        let xMovement = bannerCollectionView.contentOffset.x
-//        let x = xMovement + 1
-//        let fullyScrolledContentOffset:CGFloat = bannerCollectionView.frame.size.width * CGFloat(totalParticipants.count - 1)
-//        
-//        if (scrollView.contentOffset.x >= fullyScrolledContentOffset) {
-//            
-//        }
-//        
-//        
-//    }
-    
     func autoScroll() {
-//        let xMovement = bannerCollectionView.contentOffset.x
-//        let x = xMovement + 1
-//
-//        UIView.animate(withDuration: 0.001, delay: 0, options: [.curveEaseInOut], animations: { [weak self]() -> Void in
-//            self?.bannerCollectionView.contentOffset = CGPoint(x: x, y: 0)
-//        }) { [weak self](finished) -> Void in
-//            self?.autoScroll()
-//        }
+        self.bannerCollectionView.performBatchUpdates({
+            let firstItem = self.totalParticipants.remove(at: 0)
+            self.totalParticipants.append(firstItem)
+        }) { (finished) in
+            self.bannerCollectionView.reloadData()
+        }
     }
     
     // MARK: UICollectionViewDelegate
