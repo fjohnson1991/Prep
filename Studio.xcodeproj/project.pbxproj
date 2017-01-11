@@ -10,13 +10,13 @@
 		63AE9C8B5F8AD43EB9A19AF9 /* Pods_Studio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01BED6A852FAF9A61220699E /* Pods_Studio.framework */; };
 		B55031B61E1DA3FB004B0E25 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55031B51E1DA3FB004B0E25 /* ChartViewController.swift */; };
 		B55AA8BC1E1C4FAF0036BE7B /* MovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55AA8BB1E1C4FAF0036BE7B /* MovieViewController.swift */; };
+		B55B5EDB1E26A43800764B39 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B55B5EDA1E26A43800764B39 /* GoogleService-Info.plist */; };
 		B55C507C1E1EB9C100FB234A /* LineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55C507B1E1EB9C100FB234A /* LineChart.swift */; };
 		B55C507E1E1EBAA300FB234A /* CubicChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55C507D1E1EBAA300FB234A /* CubicChart.swift */; };
 		B55C50AC1E2070AE00FB234A /* HeartRateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55C50AB1E2070AE00FB234A /* HeartRateViewController.swift */; };
 		B55C50AE1E21448100FB234A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55C50AD1E21448100FB234A /* User.swift */; };
 		B55C50B11E21452500FB234A /* ExerciseClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55C50B01E21452500FB234A /* ExerciseClass.swift */; };
 		B55C50B31E214CDD00FB234A /* FirebaseMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55C50B21E214CDC00FB234A /* FirebaseMethods.swift */; };
-		B55C50B51E2167DF00FB234A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B55C50B41E2167DF00FB234A /* GoogleService-Info.plist */; };
 		B57412C91E1EA2DF0082C1A7 /* CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57412C81E1EA2DF0082C1A7 /* CustomColor.swift */; };
 		B57412CB1E1EAE340082C1A7 /* BarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57412CA1E1EAE340082C1A7 /* BarChart.swift */; };
 		B59A1BF81E23D4F700A7799F /* BannerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59A1BF71E23D4F700A7799F /* BannerCollectionViewCell.swift */; };
@@ -36,13 +36,13 @@
 		9C0EB65CA1F0AA5AED6B2228 /* Pods-Studio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studio.release.xcconfig"; path = "Pods/Target Support Files/Pods-Studio/Pods-Studio.release.xcconfig"; sourceTree = "<group>"; };
 		B55031B51E1DA3FB004B0E25 /* ChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		B55AA8BB1E1C4FAF0036BE7B /* MovieViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieViewController.swift; sourceTree = "<group>"; };
+		B55B5EDA1E26A43800764B39 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B55C507B1E1EB9C100FB234A /* LineChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineChart.swift; sourceTree = "<group>"; };
 		B55C507D1E1EBAA300FB234A /* CubicChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CubicChart.swift; sourceTree = "<group>"; };
 		B55C50AB1E2070AE00FB234A /* HeartRateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeartRateViewController.swift; sourceTree = "<group>"; };
 		B55C50AD1E21448100FB234A /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B55C50B01E21452500FB234A /* ExerciseClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseClass.swift; sourceTree = "<group>"; };
 		B55C50B21E214CDC00FB234A /* FirebaseMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseMethods.swift; sourceTree = "<group>"; };
-		B55C50B41E2167DF00FB234A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B57412C81E1EA2DF0082C1A7 /* CustomColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomColor.swift; sourceTree = "<group>"; };
 		B57412CA1E1EAE340082C1A7 /* BarChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarChart.swift; sourceTree = "<group>"; };
 		B59A1BF71E23D4F700A7799F /* BannerCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -145,8 +145,8 @@
 		B5F56BC21E1B09A000BBA975 /* Studio */ = {
 			isa = PBXGroup;
 			children = (
-				B55C50B41E2167DF00FB234A /* GoogleService-Info.plist */,
 				B5F56BD71E1BD8F200BBA975 /* Studio.entitlements */,
+				B55B5EDA1E26A43800764B39 /* GoogleService-Info.plist */,
 				B55C50AF1E21448800FB234A /* Model */,
 				B55C507F1E1EBBF300FB234A /* Views */,
 				B55C50801E1EBC0000FB234A /* Controllers */,
@@ -237,8 +237,8 @@
 			files = (
 				B5F56BCE1E1B09A000BBA975 /* LaunchScreen.storyboard in Resources */,
 				B5F56BCB1E1B09A000BBA975 /* Assets.xcassets in Resources */,
+				B55B5EDB1E26A43800764B39 /* GoogleService-Info.plist in Resources */,
 				B5F56BC91E1B09A000BBA975 /* Main.storyboard in Resources */,
-				B55C50B51E2167DF00FB234A /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -439,7 +439,7 @@
 				INFOPLIST_FILE = Studio/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.FJ.Studio;
+				PRODUCT_BUNDLE_IDENTIFIER = com.FJ.Studio12;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -455,7 +455,7 @@
 				INFOPLIST_FILE = Studio/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.FJ.Studio;
+				PRODUCT_BUNDLE_IDENTIFIER = com.FJ.Studio12;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

@@ -116,7 +116,6 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
             print("play")
             self.player.play()
             self.isPlaying = true
-            
         }
     }
     

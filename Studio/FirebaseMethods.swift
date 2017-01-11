@@ -35,7 +35,7 @@ class FirebaseMethods {
         if email != "" && password != "" {
             FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user, error) in
                 if error == nil {
-                    let userDictionary = ["email": email, "name": name, "username": username, "userUniqueKey": (user?.uid)!, "avatarIcon": "no image"]
+                    let userDictionary = ["email": email, "name": name, "username": username, "userUniqueKey": (user?.uid)!, "avatarIcon": "no image", "recentBPM": "none"]
                     
                     ref.child("users").child((user?.uid)!).setValue(userDictionary)
                     boolToPass = true
@@ -67,19 +67,33 @@ class FirebaseMethods {
         
         // included SOLELY FOR DUMMY DATA:
         
-        FIRDatabase.database().reference().child("users").child("AboONotvV4dFoMBZaKsib8hcNtF3").child("currentClass").observeSingleEvent(of: .value, with: { (snapshot) in
+        let userOneRef = FIRDatabase.database().reference().child("users").child("eWl3v4c6snTJY0O65zUPyu9ypa53").child("currentClass")
+        userOneRef.observeSingleEvent(of: .value, with: { (snapshot) in
             if !snapshot.hasChildren() {
                 print("no BPM data")
             } else {
-                currentClassRef.removeValue()
+                print("REMOVED eWl3v4c6snTJY0O65zUPyu9ypa53 DATA")
+                userOneRef.removeValue()
             }
         })
         
-        FIRDatabase.database().reference().child("users").child("AboONotvV4dFoMBZaKsib8hcNtF4").child("currentClass").observeSingleEvent(of: .value, with: { (snapshot) in
+        let userTwoRef = FIRDatabase.database().reference().child("users").child("eWl3v4c6snTJY0O65zUPyu9ypa54").child("currentClass")
+        userTwoRef.observeSingleEvent(of: .value, with: { (snapshot) in
             if !snapshot.hasChildren() {
                 print("no BPM data")
             } else {
-                currentClassRef.removeValue()
+                print("REMOVED eWl3v4c6snTJY0O65zUPyu9ypa54 DATA")
+                userTwoRef.removeValue()
+            }
+        })
+        
+        let userThreeRef = FIRDatabase.database().reference().child("users").child("eWl3v4c6snTJY0O65zUPyu9ypa55").child("currentClass")
+        userThreeRef.observeSingleEvent(of: .value, with: { (snapshot) in
+            if !snapshot.hasChildren() {
+                print("no BPM data")
+            } else {
+                print("REMOVED eWl3v4c6snTJY0O65zUPyu9ypa55 DATA")
+                userThreeRef.removeValue()
             }
         })
     }
@@ -97,14 +111,17 @@ class FirebaseMethods {
         
         currentClassRef.updateChildValues([bpmKey: valuesToUpdate])
         recentClassRef.updateChildValues(["recentBPM" : "\(bpm)"])
-        previousClassRef.updateChildValues([bpmKey : ["timestamp": timeStamp, "value" : "\(bpm)"]])
+        //previousClassRef.updateChildValues([bpmKey : ["timestamp": timeStamp, "value" : "\(bpm)"]])
         
         // included SOLELY FOR DUMMY DATA:
-        FIRDatabase.database().reference().child("users").child("AboONotvV4dFoMBZaKsib8hcNtF3").child("currentClass").updateChildValues([bpmKey: valuesToUpdate])
-        FIRDatabase.database().reference().child("users").child("AboONotvV4dFoMBZaKsib8hcNtF3").updateChildValues(["recentBPM" : "\(bpm)"])
+        FIRDatabase.database().reference().child("users").child("eWl3v4c6snTJY0O65zUPyu9ypa53").child("currentClass").updateChildValues([bpmKey: valuesToUpdate])
+        FIRDatabase.database().reference().child("users").child("eWl3v4c6snTJY0O65zUPyu9ypa53").updateChildValues(["recentBPM" : "\(bpm)"])
         
-        FIRDatabase.database().reference().child("users").child("AboONotvV4dFoMBZaKsib8hcNtF4").child("currentClass").updateChildValues([bpmKey: valuesToUpdate])
-        FIRDatabase.database().reference().child("users").child("AboONotvV4dFoMBZaKsib8hcNtF4").updateChildValues(["recentBPM" : "\(bpm)"])
+        FIRDatabase.database().reference().child("users").child("eWl3v4c6snTJY0O65zUPyu9ypa54").child("currentClass").updateChildValues([bpmKey: valuesToUpdate])
+        FIRDatabase.database().reference().child("users").child("eWl3v4c6snTJY0O65zUPyu9ypa54").updateChildValues(["recentBPM" : "\(bpm)"])
+        
+        FIRDatabase.database().reference().child("users").child("eWl3v4c6snTJY0O65zUPyu9ypa55").child("currentClass").updateChildValues([bpmKey: valuesToUpdate])
+        FIRDatabase.database().reference().child("users").child("eWl3v4c6snTJY0O65zUPyu9ypa55").updateChildValues(["recentBPM" : "\(bpm)"])
         
     }
     
@@ -141,7 +158,6 @@ class FirebaseMethods {
                         let gender = userInfo["gender"] as? String,
                         let age = userInfo["age"] as? String,
                         let location = userInfo["location"] as? String,
-                        let currentClass = userInfo["currentClass"] as? [String: Any],
                         let recentBPM = userInfo["recentBPM"] as? String
                         else { return }
                     
