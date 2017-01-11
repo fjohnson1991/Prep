@@ -13,7 +13,6 @@ import Firebase
 class FirebaseMethods {
     
     //MARK: - Sign Up & Log In funcs
-    
     static func signInButton(email: String, password: String, completion: @escaping (Bool) -> () ) {
         
         FIRAuth.auth()?.signIn(withEmail: email, password: password) { (user, error) in
@@ -25,7 +24,6 @@ class FirebaseMethods {
             }
         }
     }
-    
     
     static func signUpButton(email: String, password: String, name: String, username: String, completion: @escaping (Bool) -> () ) {
         
@@ -51,7 +49,6 @@ class FirebaseMethods {
     }
     
     //MARK: - Remove previous "current class" BPM from Firebase
-    
     class func removePreviousCurrentClassData() {
         guard let currentUserID = FIRAuth.auth()?.currentUser?.uid else { return }
         let currentClassRef = FIRDatabase.database().reference().child("users").child(currentUserID).child("currentClass")
@@ -66,13 +63,11 @@ class FirebaseMethods {
         
         
         // included SOLELY FOR DUMMY DATA:
-        
         let userOneRef = FIRDatabase.database().reference().child("users").child("eWl3v4c6snTJY0O65zUPyu9ypa53").child("currentClass")
         userOneRef.observeSingleEvent(of: .value, with: { (snapshot) in
             if !snapshot.hasChildren() {
                 print("no BPM data")
             } else {
-                print("REMOVED eWl3v4c6snTJY0O65zUPyu9ypa53 DATA")
                 userOneRef.removeValue()
             }
         })
@@ -82,7 +77,6 @@ class FirebaseMethods {
             if !snapshot.hasChildren() {
                 print("no BPM data")
             } else {
-                print("REMOVED eWl3v4c6snTJY0O65zUPyu9ypa54 DATA")
                 userTwoRef.removeValue()
             }
         })
@@ -92,14 +86,12 @@ class FirebaseMethods {
             if !snapshot.hasChildren() {
                 print("no BPM data")
             } else {
-                print("REMOVED eWl3v4c6snTJY0O65zUPyu9ypa55 DATA")
                 userThreeRef.removeValue()
             }
         })
     }
     
     //MARK: - Send BPM to Firebase
-    
     class func sendBPMToFirebase(with exerciseClassUniqueKey: String, bpm: String) {
         guard let currentUserID = FIRAuth.auth()?.currentUser?.uid else { return }
         let recentClassRef = FIRDatabase.database().reference().child("users").child(currentUserID)
@@ -126,7 +118,6 @@ class FirebaseMethods {
     }
     
     //MARK: - Retrive BPM from Firebase
-    
     class func getCurrentUsersLiveUpdateBPM(with completion: @escaping (String) -> Void) {
         guard let currentUserID = FIRAuth.auth()?.currentUser?.uid else { return }
         let currentClassRef = FIRDatabase.database().reference().child("users").child(currentUserID).child("recentBPM")
@@ -138,7 +129,6 @@ class FirebaseMethods {
     }
     
     //MARK: - Retrive users in current class from Firebase
-    
     class func retrieveAllUsersInClass(with exerciseClassUniqueKey: String, completion: @escaping ([User]) -> Void) {
         let userClassRef = FIRDatabase.database().reference().child("users")
         var users = [User]()
