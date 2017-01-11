@@ -15,7 +15,6 @@ import AVKit
 class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource {
     
     @IBOutlet weak var bannerCollectionView: UICollectionView!
-    
     var centralManager: CBCentralManager!
     var connectingPeripheral: CBPeripheral!
     var classParticipant: User!
@@ -163,7 +162,6 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
     func cellConfig() {
         let screedWidth = view.frame.width
         let screenHeight = view.frame.height
-        
         let numOfRows = CGFloat(1.0)
         let numOfColumns = CGFloat(3.0)
         
@@ -175,7 +173,6 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
         
         let totalWidthDeduction = (minimumInterItemSpacing + minimumInterItemSpacing + sectionInsets.right + sectionInsets.left)
         let totalHeightDeduction = (sectionInsets.right + sectionInsets.left + minimumLineSpacing + minimumLineSpacing)
-        
         itemSize = CGSize(width: (screedWidth - totalWidthDeduction)/numOfColumns, height: (screenHeight - totalHeightDeduction)/numOfRows)
     }
     
@@ -184,11 +181,9 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
         return 1
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 3
     }
-    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "bannerCellIdentifier", for: indexPath) as! BannerCollectionViewCell
