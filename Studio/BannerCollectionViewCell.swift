@@ -35,13 +35,13 @@ class BannerCollectionViewCell: UICollectionViewCell {
     }
     
     private func configureView() {
-        // avatarImage Config
+        //AvatarImage Config
         avatarImageView.translatesAutoresizingMaskIntoConstraints = false
         avatarImageView = UIImageView(frame: CGRect(x: 20, y: 35, width: 40, height: 40))
         avatarImageView.contentMode = .scaleAspectFill
         self.addSubview(avatarImageView)
         
-        // usernameLabel Config
+        //UsernameLabel Config
         self.addSubview(usernameLabel)
         usernameLabel.translatesAutoresizingMaskIntoConstraints = false
         usernameLabel.heightAnchor.constraint(equalToConstant: 15).isActive = true
@@ -49,7 +49,7 @@ class BannerCollectionViewCell: UICollectionViewCell {
         usernameLabel.font = UIFont(name: "Helvetica", size: 15.0)
         usernameLabel.textColor = UIColor.white
         
-        // ageGenderLocation Config
+        //AgeGenderLocation Config
         self.addSubview(ageGenderLocation)
         ageGenderLocation.translatesAutoresizingMaskIntoConstraints = false
         ageGenderLocation.heightAnchor.constraint(equalToConstant: 15).isActive = true
@@ -57,14 +57,14 @@ class BannerCollectionViewCell: UICollectionViewCell {
         ageGenderLocation.font = UIFont(name: "Helvetica", size: 12.0)
         ageGenderLocation.textColor = UIColor.white
         
-        // bpmLabel Config
+        //BpmLabel Config
         self.addSubview(bpmLabel)
         bpmLabel.translatesAutoresizingMaskIntoConstraints = false
         bpmLabel.heightAnchor.constraint(equalToConstant: 15).isActive = true
         bpmLabel.font = UIFont(name: "Helvetica", size: 12.0)
         bpmLabel.textColor = UIColor.white
         
-        // stack view Config
+        //Stack view Config
         let stackView = UIStackView()
         stackView.axis = UILayoutConstraintAxis.vertical
         stackView.distribution  = UIStackViewDistribution.equalSpacing
@@ -77,7 +77,7 @@ class BannerCollectionViewCell: UICollectionViewCell {
         stackView.translatesAutoresizingMaskIntoConstraints = false;
         self.addSubview(stackView)
         
-        // stack view constraints
+        //Stack view constraints
         stackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 20).isActive = true
         stackView.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 8).isActive = true
     }
@@ -93,7 +93,7 @@ class BannerCollectionViewCell: UICollectionViewCell {
         usernameLabel.text = username
         ageGenderLocation.text = "\(age) / \(gender) / \(location)"
         
-        //bpm and image text config
+        //Bpm and image text config
         let attachment = NSTextAttachment()
         attachment.image = UIImage(named: "HeartrateChart")
         let attachmentString = NSAttributedString(attachment: attachment)

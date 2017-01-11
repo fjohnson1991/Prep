@@ -15,7 +15,6 @@ import AVKit
 class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource {
     
     @IBOutlet weak var bannerCollectionView: UICollectionView!
-    
     var centralManager: CBCentralManager!
     var connectingPeripheral: CBPeripheral!
     var classParticipant: User!
@@ -35,8 +34,6 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
     var currentBPMLabel = UILabel()
     var invisibleButton = UIButton()
     var isPlaying = Bool()
-    var reversetotalParticipantsArray = [User]()
-    var fullyScrolledContentOffset:CGFloat!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,13 +46,13 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
         configViews()
         FirebaseMethods.removePreviousCurrentClassData()
         
-        // timers
+        //Timers
         _ = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(HeartRateViewController.updateBPM), userInfo: nil, repeats: true)
         _ = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(HeartRateViewController.liveBPMUpdateLabel), userInfo: nil, repeats: true)
         
     }
     
-    //Config view
+    //MARK: Config view
     func configViews() {
         FirebaseMethods.retrieveAllUsersInClass(with: "exerciseClassID1234") { (users) in
             self.totalParticipants = users
@@ -78,7 +75,7 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
         }
     }
     
-    //Movie Config
+    //MARK: Movie Config
     func configVideo() {
         self.movieView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(self.movieView)
@@ -104,7 +101,7 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
         isPlaying = true
     }
     
-    // Pause & play tap config
+    //MARK: Pause & play tap config
     func handleTapGesture(_ sender: UITapGestureRecognizer) {
         if isPlaying == true {
             print("CURRENT PAUSE TIME: \(self.player.currentTime().value)")
@@ -116,11 +113,10 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
             print("play")
             self.player.play()
             self.isPlaying = true
-            
         }
     }
     
-    // BPM live update
+    //MARK: BPM live update
     func liveBPMUpdateLabel() {
         self.currentBPMLabel.translatesAutoresizingMaskIntoConstraints = false
         self.movieView.addSubview(self.currentBPMLabel)
@@ -146,7 +142,7 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
         }
     }
     
-    // BPM timer update
+    //MARK: BPM timer update
     func updateBPM() {
         FirebaseMethods.retrieveAllUsersInClass(with: "exerciseClassID1234") { (users) in
             self.totalParticipants = users
@@ -154,7 +150,7 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
         }
     }
     
-    // Landscape mode
+    //MARK: Landscape mode
     private func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         return UIInterfaceOrientationMask.landscapeLeft
     }
@@ -162,11 +158,10 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
         return true
     }
     
-    // CollectionView Setup
+    //MARK: CollectionView Setup
     func cellConfig() {
         let screedWidth = view.frame.width
         let screenHeight = view.frame.height
-        
         let numOfRows = CGFloat(1.0)
         let numOfColumns = CGFloat(3.0)
         
@@ -178,20 +173,17 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
         
         let totalWidthDeduction = (minimumInterItemSpacing + minimumInterItemSpacing + sectionInsets.right + sectionInsets.left)
         let totalHeightDeduction = (sectionInsets.right + sectionInsets.left + minimumLineSpacing + minimumLineSpacing)
-        
         itemSize = CGSize(width: (screedWidth - totalWidthDeduction)/numOfColumns, height: (screenHeight - totalHeightDeduction)/numOfRows)
     }
     
-    // MARK: UICollectionViewDataSource
+    //MARK: UICollectionViewDataSource
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 3
     }
-    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "bannerCellIdentifier", for: indexPath) as! BannerCollectionViewCell
@@ -200,7 +192,7 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
         return cell
     }
     
-    // MARK: UICollectionView continuous scrolling
+    //MARK: UICollectionView continuous scrolling
     func autoScroll() {
         self.bannerCollectionView.performBatchUpdates({
             let firstItem = self.totalParticipants.remove(at: 0)
@@ -210,7 +202,7 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
         }
     }
     
-    // MARK: UICollectionViewDelegate
+    //MARK: UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return minimumLineSpacing
     }
@@ -227,15 +219,13 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
         return itemSize
     }
     
-    // Bluetooth funcs
+    //MARK: Bluetooth funcs
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         switch central.state {
         case .poweredOn:
             print("powered on")
-            
             let serviceUUIDs = [CBUUID(string: "180D")]
             let lastPeripherals = centralManager.retrieveConnectedPeripherals(withServices: serviceUUIDs)
-            
             if lastPeripherals.count > 0 {
                 print("iperipherals")
                 let device = lastPeripherals.last! as CBPeripheral;
