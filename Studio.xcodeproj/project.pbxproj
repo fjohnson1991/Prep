@@ -9,19 +9,13 @@
 /* Begin PBXBuildFile section */
 		63AE9C8B5F8AD43EB9A19AF9 /* Pods_Studio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01BED6A852FAF9A61220699E /* Pods_Studio.framework */; };
 		B51BC4DC1E26F201000BAFF9 /* MovieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51BC4DB1E26F201000BAFF9 /* MovieView.swift */; };
-		B55031B61E1DA3FB004B0E25 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55031B51E1DA3FB004B0E25 /* ChartViewController.swift */; };
-		B55AA8BC1E1C4FAF0036BE7B /* MovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55AA8BB1E1C4FAF0036BE7B /* MovieViewController.swift */; };
 		B55B5EDB1E26A43800764B39 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B55B5EDA1E26A43800764B39 /* GoogleService-Info.plist */; };
-		B55C507C1E1EB9C100FB234A /* LineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55C507B1E1EB9C100FB234A /* LineChart.swift */; };
-		B55C507E1E1EBAA300FB234A /* CubicChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55C507D1E1EBAA300FB234A /* CubicChart.swift */; };
 		B55C50AC1E2070AE00FB234A /* HeartRateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55C50AB1E2070AE00FB234A /* HeartRateViewController.swift */; };
 		B55C50AE1E21448100FB234A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55C50AD1E21448100FB234A /* User.swift */; };
 		B55C50B11E21452500FB234A /* ExerciseClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55C50B01E21452500FB234A /* ExerciseClass.swift */; };
 		B55C50B31E214CDD00FB234A /* FirebaseMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55C50B21E214CDC00FB234A /* FirebaseMethods.swift */; };
 		B57412C91E1EA2DF0082C1A7 /* CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57412C81E1EA2DF0082C1A7 /* CustomColor.swift */; };
-		B57412CB1E1EAE340082C1A7 /* BarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57412CA1E1EAE340082C1A7 /* BarChart.swift */; };
 		B59A1BF81E23D4F700A7799F /* BannerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59A1BF71E23D4F700A7799F /* BannerCollectionViewCell.swift */; };
-		B5CF59561E21742200D6AA0E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CF59551E21742200D6AA0E /* LoginViewController.swift */; };
 		B5CF59581E21757F00D6AA0E /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CF59571E21757F00D6AA0E /* CustomTextField.swift */; };
 		B5CF595A1E2177BF00D6AA0E /* KeyboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CF59591E2177BF00D6AA0E /* KeyboardExtension.swift */; };
 		B5F56BC41E1B09A000BBA975 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F56BC31E1B09A000BBA975 /* AppDelegate.swift */; };
@@ -36,19 +30,13 @@
 		2C5496F5C71C701CB921559A /* Pods-Studio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studio.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Studio/Pods-Studio.debug.xcconfig"; sourceTree = "<group>"; };
 		9C0EB65CA1F0AA5AED6B2228 /* Pods-Studio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studio.release.xcconfig"; path = "Pods/Target Support Files/Pods-Studio/Pods-Studio.release.xcconfig"; sourceTree = "<group>"; };
 		B51BC4DB1E26F201000BAFF9 /* MovieView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieView.swift; sourceTree = "<group>"; };
-		B55031B51E1DA3FB004B0E25 /* ChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
-		B55AA8BB1E1C4FAF0036BE7B /* MovieViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieViewController.swift; sourceTree = "<group>"; };
 		B55B5EDA1E26A43800764B39 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		B55C507B1E1EB9C100FB234A /* LineChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineChart.swift; sourceTree = "<group>"; };
-		B55C507D1E1EBAA300FB234A /* CubicChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CubicChart.swift; sourceTree = "<group>"; };
 		B55C50AB1E2070AE00FB234A /* HeartRateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeartRateViewController.swift; sourceTree = "<group>"; };
 		B55C50AD1E21448100FB234A /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B55C50B01E21452500FB234A /* ExerciseClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseClass.swift; sourceTree = "<group>"; };
 		B55C50B21E214CDC00FB234A /* FirebaseMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseMethods.swift; sourceTree = "<group>"; };
 		B57412C81E1EA2DF0082C1A7 /* CustomColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomColor.swift; sourceTree = "<group>"; };
-		B57412CA1E1EAE340082C1A7 /* BarChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarChart.swift; sourceTree = "<group>"; };
 		B59A1BF71E23D4F700A7799F /* BannerCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerCollectionViewCell.swift; sourceTree = "<group>"; };
-		B5CF59551E21742200D6AA0E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B5CF59571E21757F00D6AA0E /* CustomTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		B5CF59591E2177BF00D6AA0E /* KeyboardExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardExtension.swift; sourceTree = "<group>"; };
 		B5F56BC01E1B09A000BBA975 /* Studio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Studio.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,11 +73,8 @@
 		B55C507F1E1EBBF300FB234A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				B57412CA1E1EAE340082C1A7 /* BarChart.swift */,
 				B51BC4DB1E26F201000BAFF9 /* MovieView.swift */,
 				B59A1BF71E23D4F700A7799F /* BannerCollectionViewCell.swift */,
-				B55C507B1E1EB9C100FB234A /* LineChart.swift */,
-				B55C507D1E1EBAA300FB234A /* CubicChart.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -97,9 +82,6 @@
 		B55C50801E1EBC0000FB234A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				B55AA8BB1E1C4FAF0036BE7B /* MovieViewController.swift */,
-				B5CF59551E21742200D6AA0E /* LoginViewController.swift */,
-				B55031B51E1DA3FB004B0E25 /* ChartViewController.swift */,
 				B55C50AB1E2070AE00FB234A /* HeartRateViewController.swift */,
 			);
 			name = Controllers;
@@ -302,19 +284,13 @@
 			files = (
 				B5CF59581E21757F00D6AA0E /* CustomTextField.swift in Sources */,
 				B5CF595A1E2177BF00D6AA0E /* KeyboardExtension.swift in Sources */,
-				B55AA8BC1E1C4FAF0036BE7B /* MovieViewController.swift in Sources */,
 				B55C50B31E214CDD00FB234A /* FirebaseMethods.swift in Sources */,
-				B55C507E1E1EBAA300FB234A /* CubicChart.swift in Sources */,
 				B57412C91E1EA2DF0082C1A7 /* CustomColor.swift in Sources */,
-				B55031B61E1DA3FB004B0E25 /* ChartViewController.swift in Sources */,
 				B51BC4DC1E26F201000BAFF9 /* MovieView.swift in Sources */,
-				B55C507C1E1EB9C100FB234A /* LineChart.swift in Sources */,
-				B57412CB1E1EAE340082C1A7 /* BarChart.swift in Sources */,
 				B55C50AC1E2070AE00FB234A /* HeartRateViewController.swift in Sources */,
 				B55C50B11E21452500FB234A /* ExerciseClass.swift in Sources */,
 				B5F56BC41E1B09A000BBA975 /* AppDelegate.swift in Sources */,
 				B55C50AE1E21448100FB234A /* User.swift in Sources */,
-				B5CF59561E21742200D6AA0E /* LoginViewController.swift in Sources */,
 				B5F56BD61E1BD73200BBA975 /* Constants.swift in Sources */,
 				B59A1BF81E23D4F700A7799F /* BannerCollectionViewCell.swift in Sources */,
 			);
