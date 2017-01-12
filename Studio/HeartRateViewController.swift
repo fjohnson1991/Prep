@@ -12,7 +12,11 @@ import Foundation
 import AVFoundation
 import AVKit
 
-class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource {
+protocol getParticipents {
+    func getParticipents(with users: [User])
+}
+
+class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource, getParticipents {
     
     @IBOutlet weak var bannerCollectionView: UICollectionView!
     var centralManager: CBCentralManager!
@@ -28,12 +32,7 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
     var insetSpacing: CGFloat!
     var minimumInterItemSpacing: CGFloat!
     var minimumLineSpacing: CGFloat!
-    var movieView = UIView()
-    var player: AVPlayer!
-    var controller = AVPlayerViewController()
-    var currentBPMLabel = UILabel()
-    var invisibleButton = UIButton()
-    var isPlaying = Bool()
+    var movieView = MovieView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,8 +47,6 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
         
         //Timers
         _ = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(HeartRateViewController.updateBPM), userInfo: nil, repeats: true)
-        _ = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(HeartRateViewController.liveBPMUpdateLabel), userInfo: nil, repeats: true)
-        
     }
     
     //MARK: Config view
@@ -57,8 +54,17 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
         FirebaseMethods.retrieveAllUsersInClass(with: "exerciseClassID1234") { (users) in
             self.totalParticipants = users
             self.bannerCollectionView.reloadData()
+            self.getParticipents(with: users)
             self.cellConfig()
-            self.configVideo()
+            
+            //Movie view 
+            self.movieView.translatesAutoresizingMaskIntoConstraints = false
+            self.view.addSubview(self.movieView)
+            self.movieView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+            self.movieView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+            self.movieView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+            self.movieView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+            //CollectionView
             self.bannerCollectionView.delegate = self
             self.bannerCollectionView.dataSource = self
             self.bannerCollectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -70,76 +76,13 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
             self.view.addSubview(self.bannerCollectionView)
             self.bannerCollectionView.isUserInteractionEnabled = false
             self.bannerCollectionView.showsHorizontalScrollIndicator = true
-            self.liveBPMUpdateLabel()
             _ = Timer.scheduledTimer(timeInterval: 0.9, target: self, selector: #selector(HeartRateViewController.autoScroll), userInfo: nil, repeats: true)
         }
     }
     
-    //MARK: Movie Config
-    func configVideo() {
-        self.movieView.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(self.movieView)
-        self.movieView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-        self.movieView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
-        self.movieView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-        self.movieView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-        
-        guard let url: URL = URL(string: "http://devstreaming.apple.com/videos/wwdc/2016/102w0bsn0ge83qfv7za/102/hls_vod_mvp.m3u8") else { print("video URL error"); return }
-        player = AVPlayer(url: url)
-        controller.player = player
-        controller.view.frame = self.movieView.bounds
-        movieView.addSubview(controller.view)
-        
-        invisibleButton.translatesAutoresizingMaskIntoConstraints = false
-        movieView.addSubview(invisibleButton)
-        invisibleButton.topAnchor.constraint(equalTo: self.movieView.topAnchor).isActive = true
-        invisibleButton.bottomAnchor.constraint(equalTo: self.movieView.bottomAnchor, constant: 0).isActive = true
-        invisibleButton.leadingAnchor.constraint(equalTo: self.movieView.leadingAnchor).isActive = true
-        invisibleButton.trailingAnchor.constraint(equalTo: self.movieView.trailingAnchor).isActive = true
-        invisibleButton.addTarget(self, action: #selector(handleTapGesture(_:)), for: .touchDown)
-        player.play()
-        isPlaying = true
-    }
-    
-    //MARK: Pause & play tap config
-    func handleTapGesture(_ sender: UITapGestureRecognizer) {
-        if isPlaying == true {
-            print("CURRENT PAUSE TIME: \(self.player.currentTime().value)")
-            print("pause")
-            self.player.pause()
-            self.isPlaying = false
-        } else {
-            print("CURRENT PLAY TIME: \(self.player.currentTime().value)")
-            print("play")
-            self.player.play()
-            self.isPlaying = true
-        }
-    }
-    
-    //MARK: BPM live update
-    func liveBPMUpdateLabel() {
-        self.currentBPMLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.movieView.addSubview(self.currentBPMLabel)
-        self.currentBPMLabel.topAnchor.constraint(equalTo: self.movieView.topAnchor, constant: 20).isActive = true
-        self.currentBPMLabel.leadingAnchor.constraint(equalTo: self.movieView.leadingAnchor, constant: 20).isActive = true
-        self.currentBPMLabel.widthAnchor.constraint(equalToConstant: 50).isActive = true
-        self.currentBPMLabel.heightAnchor.constraint(equalToConstant: 35).isActive = true
-        self.currentBPMLabel.layer.cornerRadius = 3.0
-        self.currentBPMLabel.layer.backgroundColor = UIColor.orange.withAlphaComponent(0.3).cgColor
-        self.currentBPMLabel.textColor = UIColor.white
-        self.currentBPMLabel.font = UIFont(name: "Helvetica", size: 15)
-        
-        FirebaseMethods.getCurrentUsersLiveUpdateBPM { (bpm) in
-            let attachment = NSTextAttachment()
-            attachment.image = UIImage(named: "HeartrateChart")
-            let attachmentString = NSAttributedString(attachment: attachment)
-            let bpmString = NSAttributedString(string: " \(bpm)")
-            let myString = NSMutableAttributedString(string: "")
-            myString.append(attachmentString)
-            myString.append(bpmString)
-            self.currentBPMLabel.attributedText = myString
-            self.currentBPMLabel.textAlignment = .center
-        }
+    //MARK: Conform to getParticipents protocol
+    func getParticipents(with users: [User]) {
+        movieView.users = users
     }
     
     //MARK: BPM timer update
