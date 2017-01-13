@@ -39,9 +39,6 @@ class VideoHeartRateViewController: UIViewController, CBCentralManagerDelegate, 
         
         centralManager = CBCentralManager(delegate: self, queue: DispatchQueue.main)
         
-        let value = UIInterfaceOrientation.landscapeLeft.rawValue
-        UIDevice.current.setValue(value, forKey: "orientation")
-        
         configViews()
         FirebaseMethods.removePreviousCurrentClassData()
         
@@ -64,6 +61,7 @@ class VideoHeartRateViewController: UIViewController, CBCentralManagerDelegate, 
             self.movieView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
             self.movieView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
             self.movieView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+            
             //CollectionView
             self.bannerCollectionView.delegate = self
             self.bannerCollectionView.dataSource = self
@@ -91,14 +89,6 @@ class VideoHeartRateViewController: UIViewController, CBCentralManagerDelegate, 
             self.totalParticipants = users
             self.bannerCollectionView.reloadData()
         }
-    }
-    
-    //MARK: Landscape mode
-    private func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.landscapeLeft
-    }
-    private func shouldAutorotate() -> Bool {
-        return false
     }
     
     //MARK: CollectionView Setup

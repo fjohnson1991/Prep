@@ -11,7 +11,7 @@ import AVFoundation
 import AVKit
 
 class MovieView: UIView {
-
+    
     var player: AVPlayer!
     var controller = AVPlayerViewController()
     var invisibleButton = UIButton()
@@ -73,8 +73,8 @@ extension MovieView {
         controller.player = player
         controller.view.frame = self.bounds
         self.addSubview(controller.view)
-        player.play()
-        isPlaying = true
+        self.player.play()
+        self.isPlaying = true
     }
     
     //MARK: Pause & play tap config

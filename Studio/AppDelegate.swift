@@ -64,5 +64,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+    
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask(rawValue: UInt(checkOrientation(viewController: self.window?.rootViewController)))
+    }
+    
+    func checkOrientation(viewController:UIViewController?)-> Int{
+        if(viewController == nil) {
+            return Int(UIInterfaceOrientationMask.portrait.rawValue)//All means all orientation
+        } else if (viewController is VideoHeartRateViewController) {
+            return Int(UIInterfaceOrientationMask.landscape.rawValue)
+    } else {
+            return checkOrientation(viewController: viewController!.presentedViewController)
+        }
+    }
 }
 

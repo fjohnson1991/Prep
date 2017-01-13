@@ -33,7 +33,7 @@
         <!--Video Heart Rate View Controller-->
         <scene sceneID="Kyv-hM-weI">
             <objects>
-                <viewController storyboardIdentifier="HeartRateViewController" modalTransitionStyle="flipHorizontal" id="yC9-NE-BkV" customClass="VideoHeartRateViewController" customModule="Studio" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VideoHeartRateViewController" modalTransitionStyle="flipHorizontal" id="yC9-NE-BkV" customClass="VideoHeartRateViewController" customModule="Studio" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SvB-fp-j7W"/>
                         <viewControllerLayoutGuide type="bottom" id="6eH-87-PhK"/>
