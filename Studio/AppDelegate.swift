@@ -17,29 +17,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-        
         return true
     }
     
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
-
         return true
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
         FIRApp.configure()
-        
-//        let currentUser = FIRAuth.auth()?.currentUser?.email
-//        
-//        if currentUser != nil {
-//            
-//            self.window?.rootViewController = self.storyboard.instantiateViewController(withIdentifier: "HeartRateViewController")
-//        }
-//        else {
-//            self.window?.rootViewController = self.storyboard.instantiateViewController(withIdentifier: "LoginViewController")
-//        }
-        
         return true
     }
 
