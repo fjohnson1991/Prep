@@ -34,7 +34,7 @@ class BannerCollectionViewCell: UICollectionViewCell {
         configureView()
     }
     
-    private func configureView() {
+    fileprivate func configureView() {
         //AvatarImage Config
         avatarImageView.translatesAutoresizingMaskIntoConstraints = false
         avatarImageView = UIImageView(frame: CGRect(x: 20, y: 35, width: 40, height: 40))
@@ -82,16 +82,25 @@ class BannerCollectionViewCell: UICollectionViewCell {
         stackView.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 8).isActive = true
     }
     
+    private func convertAge(with age: String) -> String {
+        var finalAge = String()
+        if let firstLetter = age.characters.first {
+            finalAge = "\(firstLetter)0's"
+        }
+        return finalAge
+    }
+    
     func populateUserInfo() {
         guard let username = user?.username else { print("no username"); return }
         guard let bpm = user?.bpm else { print("no bpm"); return }
         guard let age = user?.age else { print("no age"); return }
+        let ageString = "\(age)"
         guard let gender = user?.gender else { print("no gender"); return }
         guard let location = user?.location else { print("no location"); return }
         
         avatarImageView.image = UIImage(named: "AvatarImage")
         usernameLabel.text = username
-        ageGenderLocation.text = "\(age) / \(gender) / \(location)"
+        ageGenderLocation.text = "\(convertAge(with: ageString)) / \(gender) / \(location)"
         
         //Bpm and image text config
         let attachment = NSTextAttachment()

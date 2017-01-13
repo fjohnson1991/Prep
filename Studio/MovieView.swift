@@ -29,7 +29,7 @@ class MovieView: UIView {
         }
     }
     
-    private func configureView() {
+    fileprivate func configureView() {
         //BPM Config
         currentBPMLabel.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(currentBPMLabel)

@@ -16,7 +16,7 @@ protocol getParticipents {
     func getParticipents(with users: [User])
 }
 
-class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource, getParticipents {
+class VideoHeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource, getParticipents {
     
     @IBOutlet weak var bannerCollectionView: UICollectionView!
     var centralManager: CBCentralManager!
@@ -46,7 +46,7 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
         FirebaseMethods.removePreviousCurrentClassData()
         
         //Timers
-        _ = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(HeartRateViewController.updateBPM), userInfo: nil, repeats: true)
+        _ = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(VideoHeartRateViewController.updateBPM), userInfo: nil, repeats: true)
     }
     
     //MARK: Config view
@@ -57,7 +57,7 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
             self.getParticipents(with: users)
             self.cellConfig()
             
-            //Movie view 
+            //Movie view
             self.movieView.translatesAutoresizingMaskIntoConstraints = false
             self.view.addSubview(self.movieView)
             self.movieView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
@@ -76,7 +76,7 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
             self.view.addSubview(self.bannerCollectionView)
             self.bannerCollectionView.isUserInteractionEnabled = false
             self.bannerCollectionView.showsHorizontalScrollIndicator = true
-            _ = Timer.scheduledTimer(timeInterval: 0.9, target: self, selector: #selector(HeartRateViewController.autoScroll), userInfo: nil, repeats: true)
+            _ = Timer.scheduledTimer(timeInterval: 0.9, target: self, selector: #selector(VideoHeartRateViewController.autoScroll), userInfo: nil, repeats: true)
         }
     }
     
@@ -98,7 +98,7 @@ class HeartRateViewController: UIViewController, CBCentralManagerDelegate, CBPer
         return UIInterfaceOrientationMask.landscapeLeft
     }
     private func shouldAutorotate() -> Bool {
-        return true
+        return false
     }
     
     //MARK: CollectionView Setup
